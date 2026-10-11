@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#000000">
 <title>DYINGTOLIVE.jp // SHOP</title>
-<meta name="description" content="Cheap parts. DM to order, Zelle to pay.">
+<meta name="description" content="Cheap parts. Pay with card, DM to order, Zelle to pay.">
 <link rel="icon" href="../logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -372,6 +372,19 @@
     transition: transform .15s ease, box-shadow .15s ease;
   }
   .bigbtn:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(201,201,212,.25); }
+  .cardbtn {
+    display: block; width: 100%; text-align: center;
+    background: linear-gradient(180deg, #1a2e1a, #0f1f0f 60%, #0a140a);
+    color: #7CFF6B; border: 1px solid #2d5a2d; cursor: pointer;
+    font-family: 'Anton', sans-serif; font-weight: 400; letter-spacing: 3px; font-size: 17px; text-transform: uppercase;
+    padding: 15px; margin-bottom: 9px;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .cardbtn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(124,255,107,.25); }
+  .cardbtn:disabled {
+    opacity: .45; cursor: not-allowed; color: #888; border-color: #333;
+    background: linear-gradient(180deg, #1a1a1a, #111);
+  }
   .notice {
     border: 1px dashed var(--amber);
     padding: 10px 12px;
@@ -606,7 +619,8 @@
       <div class="qty"><button id="qvMinus" aria-label="Decrease">−</button><span id="qvQty">1</span><button id="qvPlus" aria-label="Increase">+</button></div>
     </div>
     <button class="bigbtn" id="qvAdd">ADD TO CART ★</button>
-    <div class="qv-ship">★ <b>DM CHECKOUT</b> — add it, copy the order, paste it in our DM. Zelle to pay.</div>
+    <button class="cardbtn" id="qvCard">PAY WITH CARD ★</button>
+    <div class="qv-ship">★ <b>CHECKOUT</b> — pay with card, or add to cart and DM us. Zelle ok.</div>
   </div>
 </div>
 
@@ -616,7 +630,7 @@
 <script>
 // ticker
 (function () {
-  const items = ['<b>★</b> NEW DECAL DROP', 'DM TO ORDER', '<b>★</b> DYINGTOLIVE.JP', 'STATIC BUILDS ONLY', '<b>★</b> DYING TO LIVE ORIGINALS'];
+  const items = ['<b>★</b> NEW DECAL DROP', 'CARD PAY COMING SOON', '<b>★</b> DYINGTOLIVE.JP', 'STATIC BUILDS ONLY', '<b>★</b> DYING TO LIVE ORIGINALS'];
   const half = items.map(t => '<span>' + t + '</span>').join('');
   document.getElementById('ticker').innerHTML = half + half;
 })();
@@ -632,94 +646,124 @@ const CATS = { wheels: "STEERING WHEEL", custom: "CUSTOM", mats: "FLOOR MATS",
 const PRODUCTS = [
   { id: "a2", cat: "wheels", name: "Suede Deep Dish — Blue Stitch", price: 59,
     note: "350mm · 6-hole · hub adapter not included",
-    img: "img/a2.jpg" },
+    img: "img/a2.jpg",
+    stripe: "" },
   { id: "a6", cat: "wheels", name: "Purple Trim 350mm Wheel", price: 69,
     note: "350mm · deep dish · hub adapter not included",
-    img: "img/a6.jpg" },
+    img: "img/a6.jpg",
+    stripe: "" },
   { id: "a9", cat: "wheels", name: "JDM Black Deep Dish 350mm", price: 99,
     note: "350mm · deep dish · local warehouse · hub adapter not included",
-    img: "img/a9.jpg" },
+    img: "img/a9.jpg",
+    stripe: "" },
   { id: "a10", cat: "wheels", name: "Deep-Black Race Wheel 350mm + Horn", price: 65,
     note: "350mm · horn button included · local warehouse · hub adapter not included",
-    img: "img/a10.jpg" },
+    img: "img/a10.jpg",
+    stripe: "" },
   { id: "a11", cat: "wheels", name: "Carbon Fiber Quick Release 350mm", price: 59,
     note: "350mm · carbon fiber · local warehouse · hub adapter not included",
-    img: "img/a11.jpg" },
+    img: "img/a11.jpg",
+    stripe: "" },
   { id: "a12", cat: "wheels", name: "D-Shape Drift Wheel 320mm", price: 29,
     note: "320mm · flat bottom · local warehouse · hub adapter not included",
-    img: "img/a12.jpg" },
+    img: "img/a12.jpg",
+    stripe: "" },
   { id: "a13", cat: "wheels", name: "D-Shape Race Wheel + Quick Release Kit", price: 49,
     note: "quick release adapter kit included · local warehouse",
-    img: "img/a13.jpg" },
+    img: "img/a13.jpg",
+    stripe: "" },
   { id: "b4", cat: "custom", name: "Custom Japanese Text Banner", price: 18,
     note: "your text in japanese · windshield size · put the text in notes below",
-    img: "img/b4.jpg" },
+    img: "img/b4.jpg",
+    stripe: "" },
   { id: "b7", cat: "custom", name: "Laser Engraved Shift Knob", price: 45,
     note: "laser engraved with your text · put the text in notes below",
-    img: "img/b7.jpg" },
+    img: "img/b7.jpg",
+    stripe: "" },
   { id: "m1", cat: "mats", name: "Great Wave 4-Piece Mat Set", price: 45,
     note: "kanagawa wave · full 4-pc set · universal fit",
-    img: "img/mat-wave.jpg" },
+    img: "img/mat-wave.jpg",
+    stripe: "" },
   { id: "m2", cat: "mats", name: "Type R Racing 4-Piece Mats", price: 55,
     note: "type r style · full 4-pc set · universal fit",
-    img: "img/mat-typer.jpg" },
+    img: "img/mat-typer.jpg",
+    stripe: "" },
   { id: "m3", cat: "mats", name: "JDM Leaf 4-Piece Mat Set", price: 55,
     note: "jdm leaf logo · full 4-pc set · universal fit",
-    img: "img/mat-leaf.jpg" },
+    img: "img/mat-leaf.jpg",
+    stripe: "" },
   { id: "t1", cat: "tsurikawa", name: "Heart Ring Tsurikawa Handle", price: 9,
     note: "heart ring · the jdm staple · hangs from grab handle",
-    img: "img/t1.jpg" },
+    img: "img/t1.jpg",
+    stripe: "" },
   { id: "t2", cat: "tsurikawa", name: "JDM Wanted Tow Strap", price: 12,
     note: "anime graffiti strap · bumper mount · pairs with the tsurikawa",
-    img: "img/t2.jpg" },
+    img: "img/t2.jpg",
+    stripe: "" },
   { id: "t3", cat: "frames", name: "Aluminum JDM Plate Frame", price: 11,
     note: "aluminum · universal fit · clean jdm look",
-    img: "img/t3.jpg" },
+    img: "img/t3.jpg",
+    stripe: "" },
   { id: "t4", cat: "frames", name: "Aluminum Plate Frames — 2 Pack", price: 12,
     note: "front + rear set · waterproof · universal fit",
-    img: "img/t4.jpg" },
+    img: "img/t4.jpg",
+    stripe: "" },
   { id: "t5", cat: "banners", name: "ANTISOCIAL Windshield Banner", price: 8,
     note: "vinyl · windshield size · peak antisocial energy",
-    img: "img/t5.jpg" },
+    img: "img/t5.jpg",
+    stripe: "" },
   { id: "t6", cat: "banners", name: "ULTRA SLOW Japanese Banner", price: 11,
     note: "japanese text · waterproof vinyl · slow car pride",
-    img: "img/t6.jpg" },
+    img: "img/t6.jpg",
+    stripe: "" },
   { id: "t7", cat: "banners", name: "JDM Sunstrip Decal — 98.5cm", price: 11,
     note: "full-width sunstrip · waterproof · non-fading",
-    img: "img/t7.jpg" },
+    img: "img/t7.jpg",
+    stripe: "" },
   { id: "t8", cat: "knobs", name: "Bride-Style Shift Knob 13cm", price: 20,
     note: "bride style · 13cm · 8/10/12mm adapters included",
-    img: "img/t8.jpg" },
+    img: "img/t8.jpg",
+    stripe: "" },
   { id: "t9", cat: "knobs", name: "Burnt Titanium Shifter Stick 18cm", price: 18,
     note: "burnt-ti finish · 18cm aluminum · universal",
-    img: "img/t9.jpg" },
+    img: "img/t9.jpg",
+    stripe: "" },
   { id: "t10", cat: "knobs", name: "8-Ball Shift Knob", price: 22,
     note: "classic 8-ball · aluminum adapter included",
-    img: "img/t10.jpg" },
+    img: "img/t10.jpg",
+    stripe: "" },
   { id: "t11", cat: "led", name: "EL Wire Interior Kit — USB", price: 8,
     note: "usb powered · 118in · cheapest glow-up on the shelf",
-    img: "img/t11.jpg" },
+    img: "img/t11.jpg",
+    stripe: "" },
   { id: "t12", cat: "led", name: "RGB Ambient Kit — App + Music Sync", price: 18,
     note: "app + remote + music sync · 118in rgb neon",
-    img: "img/t12.jpg" },
+    img: "img/t12.jpg",
+    stripe: "" },
   { id: "t13", cat: "decals", name: "Anime Peeker Decal", price: 11,
     note: "peeker eyes · rear window essential · vinyl",
-    img: "img/t13.jpg" },
+    img: "img/t13.jpg",
+    stripe: "" },
   { id: "d1", cat: "decals", name: "White Cross Decal — 6in", price: 15, fresh: 1,
     note: "white die-cut vinyl · our cross logo · made to order ★",
-    img: "img/d1.jpg" },
+    img: "img/d1.jpg",
+    stripe: "" },
   { id: "d2", cat: "decals", name: "URL Windshield Decal", price: 15, fresh: 1,
     note: "white die-cut vinyl · long windshield format · made to order ★",
-    img: "img/d2.jpg" },
+    img: "img/d2.jpg",
+    stripe: "" },
   { id: "d3", cat: "decals", name: "Cross Banner Decal — 6in", price: 15, fresh: 1,
     note: "white die-cut vinyl · gothic cross banner · made to order ★",
-    img: "img/d3.jpg" },
+    img: "img/d3.jpg",
+    stripe: "" },
   { id: "d4", cat: "decals", name: "Reaper Peeker Decal — 6in", price: 15, fresh: 1,
     note: "white die-cut vinyl · reaper peeker · made to order ★",
-    img: "img/d4.jpg" },
+    img: "img/d4.jpg",
+    stripe: "" },
   { id: "t14", cat: "fresh", name: "Leaf Air Fresheners — Multi Pack", price: 22,
     note: "leaf shape · multi-pack · split as add-ons",
-    img: "img/t14.jpg" },
+    img: "img/t14.jpg",
+    stripe: "" },
 ];
 
 /* ============ catalog render + category filter + search + sort ============ */
@@ -865,6 +909,14 @@ function openQV(id) {
   document.getElementById("qvPrice").textContent = money(p.price);
   document.getElementById("qvQty").textContent = qvQty;
   document.getElementById("qvNew").style.display = p.fresh ? "" : "none";
+  const cardBtn = document.getElementById("qvCard");
+  if (p.stripe) {
+    cardBtn.disabled = false;
+    cardBtn.textContent = "PAY WITH CARD ★";
+  } else {
+    cardBtn.disabled = true;
+    cardBtn.textContent = "CARD PAY — COMING SOON";
+  }
   qv.classList.add("open");
   qvOverlay.classList.add("open");
   document.body.style.overflow = "hidden";
@@ -888,6 +940,10 @@ document.getElementById("qvAdd").onclick = () => {
   if (!qvId) return;
   addToCart(qvId, qvQty);
   closeQV();
+};
+document.getElementById("qvCard").onclick = () => {
+  const p = PRODUCTS.find(x => x.id === qvId);
+  if (p && p.stripe) window.open(p.stripe, "_blank");
 };
 addEventListener("keydown", e => {
   if (e.key === "Escape") { closeQV(); closeDrawer(); }
@@ -949,6 +1005,7 @@ function renderCart() {
   const total = cartTotal();
   footer.innerHTML =
     '<div class="total-row"><span>TOTAL</span><span class="amt">' + money(total) + "</span></div>" +
+    '<div class="notice">★ CARD PAYMENTS COMING SOON — tap any product for the pay-with-card button when it lights up.</div>' +
     '<div class="step"><div class="step-label"><b>STEP 1</b> — SEND THE ORDER TO OUR DM</div>' +
     '<button class="bigbtn" id="dmCheckout">PLACE ORDER ★</button>' +
     '<div class="notice">' + WARNING_TEXT + "</div></div>" +
