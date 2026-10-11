@@ -21,6 +21,7 @@
     --chrome-hi: #f4f4f7;
     --chrome: #c9c9d4;
     --chrome-lo: #63636d;
+    --amber: #f5b942;
   }
   html, body { height: 100%; }
   body {
@@ -40,6 +41,16 @@
     background-clip: text;
     color: transparent;
   }
+  /* animated chrome shine sweep */
+  .shine-text {
+    background: linear-gradient(100deg, #fdfdff 0%, #d7d7e0 28%, #6f6f79 44%, #ffffff 52%, #d7d7e0 62%, #71717b 76%, #fdfdff 100%);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: chromeShine 6.5s linear infinite;
+  }
+  @keyframes chromeShine { to { background-position: 220% center; } }
   /* film grain */
   .grain {
     position: fixed; inset: -50%; z-index: 2000; pointer-events: none; opacity: .055;
@@ -94,6 +105,19 @@
     letter-spacing: 5px; text-transform: uppercase; font-weight: 700;
   }
   .handle b { color: var(--chrome); }
+
+  /* stat chips */
+  .chips {
+    display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+    margin-top: 20px; position: relative; z-index: 2;
+  }
+  .chip {
+    font-size: 10px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--chrome); border: 1px solid var(--line);
+    background: rgba(255,255,255,.03); padding: 9px 13px;
+    backdrop-filter: blur(4px);
+  }
+  .chip b { color: var(--white); }
 
   .sec-head {
     font-family: 'Anton', sans-serif; font-weight: 400;
@@ -158,13 +182,14 @@
     from { transform: translateY(-12px) rotate(-3deg); }
     to { transform: translateY(12px) rotate(3deg); }
   }
-  .hero-block .logo-wrap, .hero-block h1.brand, .hero-block .handle { position: relative; z-index: 2; }
+  .hero-block .logo-wrap, .hero-block h1.brand, .hero-block .handle, .hero-block .chips { position: relative; z-index: 2; }
 
   /* house decals */
   .decal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .decal-card {
     display: block; text-decoration: none; color: var(--white);
     background: var(--panel); border: 1px solid var(--line); overflow: hidden;
+    position: relative;
     transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
   }
   .decal-card:hover { transform: translateY(-3px); border-color: var(--chrome); box-shadow: 0 10px 30px rgba(0,0,0,.6); }
@@ -174,6 +199,14 @@
   .decal-card .dname { font-size: 10px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
   .decal-card .dprice { font-family: 'Anton', sans-serif; font-size: 19px; color: var(--chrome); margin-top: 4px; letter-spacing: 1px; }
   .decal-card .dtag { font-size: 9px; letter-spacing: 2px; color: var(--muted); margin-top: 3px; text-transform: uppercase; font-weight: 700; }
+  .decal-card .newtag {
+    position: absolute; top: 8px; left: 8px; z-index: 2;
+    background: linear-gradient(180deg, #f2f2f6, #c9c9d4);
+    color: #000; font-size: 9px; font-weight: 900; letter-spacing: 2px;
+    padding: 4px 8px; text-transform: uppercase;
+    animation: pulseTag 1.6s ease-in-out infinite;
+  }
+  @keyframes pulseTag { 0%,100% { opacity: 1; } 50% { opacity: .72; } }
 
   footer {
     width: 100%; border-top: 1px solid var(--line); text-align: center;
@@ -208,25 +241,34 @@
       <img class="f4" src="shop/img/d2.jpg" alt="">
     </div>
     <div class="logo-wrap"><img src="logo.gif" alt="DYINGTOLIVE.jp logo"></div>
-    <h1 class="brand chrome-text">DYING<span class="row2">TO LIVE</span></h1>
+    <h1 class="brand shine-text">DYING<span class="row2">TO LIVE</span></h1>
     <p class="handle"><b>★</b> @dyingtolive.jp <b>★</b></p>
+    <div class="chips">
+      <span class="chip"><b>★</b> 25 products</span>
+      <span class="chip"><b>★</b> DM checkout</span>
+      <span class="chip"><b>★</b> Zelle ok</span>
+    </div>
   </div>
 
   <h2 class="sec-head reveal"><span class="slash">//</span> HOUSE DECALS</h2>
   <div class="decal-grid">
     <a class="decal-card reveal" href="shop/?cat=decals">
+      <span class="newtag">NEW DROP</span>
       <img src="shop/img/d1.jpg" alt="White Cross Decal">
       <div class="dmeta"><div class="dname">White Cross Decal</div><div class="dprice">$15</div><div class="dtag">our mark ★ die-cut</div></div>
     </a>
     <a class="decal-card reveal" href="shop/?cat=decals">
+      <span class="newtag">NEW DROP</span>
       <img src="shop/img/d2.jpg" alt="URL Windshield Decal">
       <div class="dmeta"><div class="dname">URL Windshield Decal</div><div class="dprice">$15</div><div class="dtag">windshield strip</div></div>
     </a>
     <a class="decal-card reveal" href="shop/?cat=decals">
+      <span class="newtag">NEW DROP</span>
       <img src="shop/img/d3.jpg" alt="Cross Banner Decal">
       <div class="dmeta"><div class="dname">Cross Banner Decal</div><div class="dprice">$15</div><div class="dtag">gothic banner</div></div>
     </a>
     <a class="decal-card reveal" href="shop/?cat=decals">
+      <span class="newtag">NEW DROP</span>
       <img src="shop/img/d4.jpg" alt="Reaper Peeker Decal">
       <div class="dmeta"><div class="dname">Reaper Peeker Decal</div><div class="dprice">$15</div><div class="dtag">peeker ★ die-cut</div></div>
     </a>
