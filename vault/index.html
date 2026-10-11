@@ -4,265 +4,298 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#000000">
-<title>DYINGTOLIVE.jp // LINKS</title>
-<meta name="description" content="Static builds only. House decals, cheap parts, DM to order.">
-<link rel="icon" href="logo.png">
+<meta name="robots" content="noindex, nofollow">
+<title>DYINGTOLIVE.jp // VAULT</title>
+<link rel="icon" href="../logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; border-radius: 0 !important; }
   :root {
-    --black: #000000;
-    --panel: #0b0b0c;
-    --white: #ffffff;
-    --muted: #8f8f96;
-    --line: #202024;
-    --chrome-hi: #f4f4f7;
-    --chrome: #c9c9d4;
-    --chrome-lo: #63636d;
-  }
-  html, body { height: 100%; }
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'Roboto', -apple-system, Helvetica, Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    overflow-x: hidden;
+    --black: #000000; --panel: #0b0b0c; --white: #ffffff;
+    --muted: #8f8f96; --line: #202024;
+    --chrome: #c9c9d4; --chrome-lo: #63636d; --red: #e02020;
   }
   .display { font-family: 'Anton', 'Roboto', sans-serif; font-weight: 400; }
   .chrome-text {
     background: linear-gradient(180deg, #ffffff 0%, #d7d7e0 34%, #71717b 49%, #ececf2 60%, #ffffff 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-  /* film grain */
-  .grain {
-    position: fixed; inset: -50%; z-index: 2000; pointer-events: none; opacity: .055;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
-    animation: grain 7s steps(8) infinite;
-  }
-  @keyframes grain {
-    0%,100% { transform: translate(0,0); } 25% { transform: translate(-4%,3%); }
-    50% { transform: translate(3%,-4%); } 75% { transform: translate(-3%,-2%); }
-  }
-  /* ticker */
-  .ticker {
-    width: 100%; border-bottom: 1px solid var(--line);
-    overflow: hidden; white-space: nowrap; background: #000;
-    padding: 9px 0; position: relative; z-index: 5;
-  }
-  .ticker-inner { display: inline-block; animation: tick 22s linear infinite; }
-  .ticker span {
-    font-weight: 900; font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
-    padding: 0 18px; color: var(--muted);
-  }
-  .ticker span b { color: var(--chrome); font-weight: 900; }
-  @keyframes tick { to { transform: translateX(-50%); } }
-
-  main {
-    width: 100%; max-width: 440px; text-align: center;
-    padding: 44px 20px 30px; flex: 1; position: relative; z-index: 2;
-  }
-  .logo-wrap {
-    width: 138px; height: 138px; margin: 0 auto 26px;
-    border: 1px solid var(--chrome-lo);
-    padding: 5px; background: #000;
-    box-shadow: 0 0 42px rgba(201,201,212,.14), inset 0 0 22px rgba(201,201,212,.06);
-    animation: logoIn .7s cubic-bezier(.2,.9,.25,1) both;
-  }
-  .logo-wrap img { width: 100%; height: 100%; display: block; object-fit: cover; background: #000; }
-  @keyframes logoIn { from { opacity: 0; transform: scale(.86); } to { opacity: 1; transform: scale(1); } }
-
-  h1.brand {
-    font-family: 'Anton', sans-serif; font-weight: 400;
-    font-size: clamp(58px, 15vw, 92px); line-height: .94; letter-spacing: 1px;
-    text-transform: uppercase;
-    animation: flicker 6s infinite;
-  }
-  h1.brand .row2 { display: block; }
-  @keyframes flicker {
-    0%,100% { opacity: 1; } 92% { opacity: 1; } 93% { opacity: .55; }
-    94% { opacity: 1; } 96% { opacity: .75; } 97% { opacity: 1; }
-  }
-  .handle {
-    color: var(--muted); font-size: 12px; margin-top: 14px;
-    letter-spacing: 5px; text-transform: uppercase; font-weight: 700;
-  }
-  .handle b { color: var(--chrome); }
-
-  .sec-head {
-    font-family: 'Anton', sans-serif; font-weight: 400;
-    font-size: 30px; letter-spacing: 2px; text-transform: uppercase;
-    text-align: left; margin: 40px 0 14px;
-  }
-  .sec-head .slash { color: var(--chrome-lo); }
-  .links { display: flex; flex-direction: column; gap: 12px; }
-  .btn {
-    display: block; text-decoration: none; color: var(--white);
-    background: linear-gradient(180deg, #101013, #08080a);
-    border: 1px solid var(--line);
-    padding: 22px 20px; text-align: left;
-    position: relative; overflow: hidden;
-    transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
-  }
-  .btn::after {
-    content: ""; position: absolute; top: 0; bottom: 0; width: 60px;
-    background: linear-gradient(100deg, transparent, rgba(255,255,255,.14), transparent);
-    left: -80px; transform: skewX(-18deg); transition: left .5s ease;
-  }
-  .btn:hover { border-color: var(--chrome); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,.6); }
-  .btn:hover::after { left: 120%; }
-  .btn .t {
-    display: block; font-family: 'Anton', sans-serif; font-weight: 400;
-    font-size: 21px; letter-spacing: 3px; text-transform: uppercase;
-  }
-  .btn .t .star { color: var(--chrome); }
-  .btn small {
-    display: block; color: var(--muted); font-size: 11px;
-    letter-spacing: 2px; margin-top: 7px; text-transform: uppercase; font-weight: 500;
-  }
-  .btn.featured {
-    background: linear-gradient(180deg, #f2f2f6 0%, #c9c9d4 45%, #8f8f9a 55%, #d9d9e2 100%);
-    border: 1px solid #e8e8ee;
-  }
-  .btn.featured .t { color: #000; }
-  .btn.featured .t .star { color: #000; }
-  .btn.featured small { color: rgba(0,0,0,.62); font-weight: 700; }
-  .btn.featured:hover { box-shadow: 0 8px 34px rgba(201,201,212,.25); }
-
-  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s cubic-bezier(.2,.9,.25,1); }
-  .reveal.in { opacity: 1; transform: none; }
-
-  /* hero with ambient motion */
-  .hero-block { position: relative; padding: 6px 0 10px; }
-  .hero-block::before {
-    content: ""; position: absolute; inset: -30px -20px;
-    background: url('img/ambient-bg.jpg') center/cover;
-    opacity: .5; pointer-events: none;
-  }
-  .floaties { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
-  .floaties img {
-    position: absolute; width: 104px; opacity: .24;
-    animation: drift 7s ease-in-out infinite alternate;
-  }
-  .floaties .f1 { top: 4%; left: -16px; animation-duration: 7s; }
-  .floaties .f2 { top: 10%; right: -12px; width: 126px; animation-duration: 9s; animation-delay: -3s; }
-  .floaties .f3 { bottom: 6%; left: 4%; width: 88px; animation-duration: 8s; animation-delay: -5s; }
-  .floaties .f4 { bottom: 12%; right: 6%; width: 96px; animation-duration: 10s; animation-delay: -2s; }
-  @keyframes drift {
-    from { transform: translateY(-12px) rotate(-3deg); }
-    to { transform: translateY(12px) rotate(3deg); }
-  }
-  .hero-block .logo-wrap, .hero-block h1.brand, .hero-block .handle { position: relative; z-index: 2; }
-
-  /* house decals */
-  .decal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .decal-card {
-    display: block; text-decoration: none; color: var(--white);
-    background: var(--panel); border: 1px solid var(--line); overflow: hidden;
-    transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
-  }
-  .decal-card:hover { transform: translateY(-3px); border-color: var(--chrome); box-shadow: 0 10px 30px rgba(0,0,0,.6); }
-  .decal-card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; transition: transform .3s ease; }
-  .decal-card:hover img { transform: scale(1.05); }
-  .decal-card .dmeta { padding: 10px 10px 12px; }
-  .decal-card .dname { font-size: 10px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
-  .decal-card .dprice { font-family: 'Anton', sans-serif; font-size: 19px; color: var(--chrome); margin-top: 4px; letter-spacing: 1px; }
-  .decal-card .dtag { font-size: 9px; letter-spacing: 2px; color: var(--muted); margin-top: 3px; text-transform: uppercase; font-weight: 700; }
-
-  footer {
-    width: 100%; border-top: 1px solid var(--line); text-align: center;
-    padding: 26px 18px 34px; position: relative; z-index: 2; background: #000;
-  }
-  footer .fine {
-    font-family: 'Anton', sans-serif; font-size: 15px;
-    letter-spacing: 6px; color: var(--chrome); text-transform: uppercase;
-  }
-  footer .tag {
-    margin-top: 10px; font-size: 10px; letter-spacing: 4px;
-    color: var(--muted); text-transform: uppercase; font-weight: 700;
-  }
-  footer .vaultlink { margin-top: 16px; }
-  footer .vaultlink a {
-    font-size: 10px; letter-spacing: 5px; color: #33333a;
-    text-decoration: none; text-transform: uppercase; font-weight: 700;
-  }
-  footer .vaultlink a:hover { color: var(--chrome-lo); }
   ::selection { background: var(--chrome); color: #000; }
+  body {
+    background: var(--black); color: var(--white);
+    font-family: 'Roboto', -apple-system, Helvetica, Arial, sans-serif;
+    min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+    padding: 60px 18px 40px; overflow-x: hidden;
+  }
+  .grain {
+    position: fixed; inset: -50%; z-index: 2000; pointer-events: none; opacity: .05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .gate { text-align: center; max-width: 360px; width: 100%; margin-top: 6vh; position: relative; z-index: 2; }
+  .gate img { width: 92px; height: 92px; margin-bottom: 22px; border: 1px solid var(--chrome-lo); padding: 4px; box-shadow: 0 0 34px rgba(201,201,212,.12); }
+  .gate h1 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 40px; letter-spacing: 4px; text-transform: uppercase; }
+  .gate p { color: var(--muted); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin: 12px 0 22px; font-weight: 700; }
+  .dots { display: flex; justify-content: center; gap: 16px; margin: 6px 0 22px; }
+  .dot {
+    width: 18px; height: 18px; border: 2px solid var(--chrome-lo);
+    background: transparent; transition: background .12s ease, box-shadow .12s ease;
+  }
+  .dot.on { background: var(--chrome); border-color: var(--chrome); box-shadow: 0 0 12px rgba(201,201,212,.6); }
+  .pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .key {
+    background: linear-gradient(180deg, #101013, #08080a); border: 1px solid var(--line); color: var(--white);
+    font-family: 'Anton', sans-serif; font-weight: 400; font-size: 22px; letter-spacing: 1px;
+    padding: 16px 0; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent;
+    transition: border-color .12s ease, transform .12s ease;
+  }
+  .key:hover { border-color: var(--chrome-lo); }
+  .key:active { background: var(--chrome); color: #000; border-color: var(--chrome); transform: scale(.97); }
+  .key.fn { font-family: 'Roboto', sans-serif; font-size: 12px; letter-spacing: 2px; color: var(--muted); font-weight: 900; }
+  .err { color: var(--red); font-size: 12px; font-weight: 900; letter-spacing: 3px; margin-top: 14px; min-height: 18px; text-transform: uppercase; }
+  .shake { animation: shake .3s ease; }
+  @keyframes shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+
+  .vault { width: 100%; max-width: 980px; display: none; position: relative; z-index: 2; }
+  .vault.open { display: block; }
+  .vault header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 12px; }
+  .vault h2 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 36px; letter-spacing: 2px; text-transform: uppercase; }
+  .vault h2 .slash { color: var(--chrome-lo); }
+  .lockbtn {
+    background: transparent; border: 1px solid #3a3a40; color: var(--white);
+    font-weight: 700; font-size: 11px; letter-spacing: 2px; padding: 10px 16px;
+    cursor: pointer; text-transform: uppercase; font-family: 'Roboto', sans-serif;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .lockbtn:hover { border-color: var(--red); color: var(--red); }
+  .sub { color: var(--muted); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; font-weight: 700; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    text-align: left; font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: 900;
+  }
+  td { padding: 12px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  tr { transition: background .12s ease; }
+  tbody tr:hover td { background: var(--panel); }
+  .pname { font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 12px; }
+  .cat { color: var(--muted); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+  .thumb {
+    width: 52px; height: 52px; object-fit: cover; float: left;
+    margin-right: 12px; border: 1px solid var(--line); background: var(--panel);
+  }
+  .fulfill { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; font-weight: 900; margin-top: 5px; }
+  .fulfill-stock { color: var(--muted); }
+  .fulfill-custom { color: #e0a030; }
+  .filters { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+  .fbtn {
+    background: transparent; border: 1px solid var(--line); color: var(--muted);
+    font-family: 'Roboto', sans-serif; font-weight: 900; font-size: 10px; letter-spacing: 2px;
+    padding: 9px 14px; cursor: pointer; text-transform: uppercase;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .fbtn:hover { border-color: var(--chrome-lo); color: var(--white); }
+  .fbtn.on { border-color: var(--chrome); color: var(--white); box-shadow: 0 0 14px rgba(201,201,212,.12); }
+  .cost { color: var(--muted); }
+  .shop { color: var(--chrome); font-weight: 900; }
+  .margin { color: #7ee787; font-weight: 700; }
+  .src {
+    display: inline-block; border: 1px solid var(--line); color: var(--white);
+    text-decoration: none; font-size: 11px; font-weight: 900; letter-spacing: 2px;
+    padding: 8px 14px; text-transform: uppercase; white-space: nowrap;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .src:hover { border-color: var(--chrome); color: var(--chrome); }
+  .warn {
+    margin-top: 26px; border: 1px dashed var(--line); padding: 14px;
+    color: var(--muted); font-size: 11px; letter-spacing: 1px; line-height: 1.8;
+    text-transform: uppercase; font-weight: 500;
+  }
+  @media (max-width: 720px) {
+    table, thead, tbody, th, td, tr { display: block; }
+    thead { display: none; }
+    tr { border: 1px solid var(--line); margin-bottom: 12px; padding: 6px 4px; }
+    td { border: none; padding: 6px 12px; }
+  }
 </style>
 </head>
 <body>
 <div class="grain"></div>
-<div class="ticker"><div class="ticker-inner" id="ticker"></div></div>
-<main>
-  <div class="hero-block">
-    <div class="floaties" aria-hidden="true">
-      <img class="f1" src="shop/img/d1.jpg" alt="">
-      <img class="f2" src="shop/img/d4.jpg" alt="">
-      <img class="f3" src="shop/img/d3.jpg" alt="">
-      <img class="f4" src="shop/img/d2.jpg" alt="">
-    </div>
-    <div class="logo-wrap"><img src="logo.gif" alt="DYINGTOLIVE.jp logo"></div>
-    <h1 class="brand chrome-text">DYING<span class="row2">TO LIVE</span></h1>
-    <p class="handle"><b>★</b> @dyingtolive.jp <b>★</b></p>
-  </div>
 
-  <h2 class="sec-head reveal"><span class="slash">//</span> HOUSE DECALS</h2>
-  <div class="decal-grid">
-    <a class="decal-card reveal" href="shop/?cat=decals">
-      <img src="shop/img/d1.jpg" alt="White Cross Decal">
-      <div class="dmeta"><div class="dname">White Cross Decal</div><div class="dprice">$15</div><div class="dtag">our mark ★ die-cut</div></div>
-    </a>
-    <a class="decal-card reveal" href="shop/?cat=decals">
-      <img src="shop/img/d2.jpg" alt="URL Windshield Decal">
-      <div class="dmeta"><div class="dname">URL Windshield Decal</div><div class="dprice">$15</div><div class="dtag">windshield strip</div></div>
-    </a>
-    <a class="decal-card reveal" href="shop/?cat=decals">
-      <img src="shop/img/d3.jpg" alt="Cross Banner Decal">
-      <div class="dmeta"><div class="dname">Cross Banner Decal</div><div class="dprice">$15</div><div class="dtag">gothic banner</div></div>
-    </a>
-    <a class="decal-card reveal" href="shop/?cat=decals">
-      <img src="shop/img/d4.jpg" alt="Reaper Peeker Decal">
-      <div class="dmeta"><div class="dname">Reaper Peeker Decal</div><div class="dprice">$15</div><div class="dtag">peeker ★ die-cut</div></div>
-    </a>
+<div class="gate" id="gate">
+  <img src="../logo.gif" alt="DYINGTOLIVE.jp">
+  <h1 class="chrome-text display">THE VAULT</h1>
+  <p>restricted — enter pin</p>
+  <div class="dots" id="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+  <div class="pad" id="pad">
+    <button class="key" data-d="1">1</button>
+    <button class="key" data-d="2">2</button>
+    <button class="key" data-d="3">3</button>
+    <button class="key" data-d="4">4</button>
+    <button class="key" data-d="5">5</button>
+    <button class="key" data-d="6">6</button>
+    <button class="key" data-d="7">7</button>
+    <button class="key" data-d="8">8</button>
+    <button class="key" data-d="9">9</button>
+    <button class="key fn" data-fn="clear">CLR</button>
+    <button class="key" data-d="0">0</button>
+    <button class="key fn" data-fn="back">⌫</button>
   </div>
+  <div class="err" id="err"></div>
+</div>
 
-  <h2 class="sec-head reveal"><span class="slash">//</span> LINKS</h2>
-  <div class="links">
-    <a class="btn featured reveal" href="shop/">
-      <span class="t">SHOP <span class="star">★</span></span>
-      <small>the catalog — DM checkout, Zelle to pay</small>
-    </a>
-    <a class="btn reveal" href="https://instagram.com/dyingtolive.jp" target="_blank" rel="noopener">
-      <span class="t">INSTAGRAM</span>
-      <small>daily steals, builds &amp; behind the scenes</small>
-    </a>
-    <a class="btn reveal" href="https://www.zellepay.com/" target="_blank" rel="noopener">
-      <span class="t">ZELLE</span>
-      <small>(713) 351-9285</small>
-    </a>
+<div class="vault" id="vault">
+  <header>
+    <h2><span class="slash">//</span> SUPPLIER VAULT</h2>
+    <button class="lockbtn" id="lock">LOCK ✕</button>
+  </header>
+  <div class="sub" id="count"></div>
+  <div class="filters" id="filters">
+    <button class="fbtn on" data-f="all">ALL</button>
+    <button class="fbtn" data-f="custom">MADE TO ORDER</button>
+    <button class="fbtn" data-f="stock">STOCK</button>
   </div>
-</main>
-<footer>
-  <div class="fine">★ DYINGTOLIVE.jp ★</div>
-  <div class="tag">static builds only</div>
-  <div class="vaultlink"><a href="/vault/">vault</a></div>
-</footer>
+  <table>
+    <thead><tr>
+      <th>PRODUCT</th><th>COST</th><th>SHOP</th><th>MARGIN</th><th>SOURCE</th>
+    </tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+  <div class="warn">This page is not linked anywhere on the site and is blocked from search engines. The supplier links are encrypted — they only decrypt with your passcode, in this browser tab, and are never sent anywhere. Bookmark this page. If you ever forget the passcode, the vault can be rebuilt from the product database — nothing is lost.</div>
+</div>
+
 <script>
-  // ticker content (duplicated for a seamless loop)
-  const items = ['<b>★</b> DYINGTOLIVE.JP', 'STATIC BUILDS ONLY', '<b>★</b> NEW DECAL DROP', 'DM TO ORDER', '<b>★</b> DYING TO LIVE ORIGINALS'];
-  const half = items.map(t => '<span>' + t + '</span>').join('');
-  document.getElementById('ticker').innerHTML = half + half;
-  // reveal on scroll
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-  }), { threshold: .12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+/* Encrypted supplier payload. Regenerate with:
+   VAULT_PASS='...' node hidden_files/build-vault.mjs
+   (passcode is never written to disk) */
+const VAULT_BLOB = "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";
+
+const enc = new TextEncoder();
+function b64ToBytes(b64) {
+  const s = atob(b64);
+  const b = new Uint8Array(s.length);
+  for (let i = 0; i < s.length; i++) b[i] = s.charCodeAt(i);
+  return b;
+}
+
+async function unlock(passcode) {
+  const raw = b64ToBytes(VAULT_BLOB);
+  const salt = raw.slice(0, 16), iv = raw.slice(16, 28), data = raw.slice(28);
+  const baseKey = await crypto.subtle.importKey("raw", enc.encode(passcode), "PBKDF2", false, ["deriveKey"]);
+  const key = await crypto.subtle.deriveKey(
+    { name: "PBKDF2", salt: salt, iterations: 200000, hash: "SHA-256" },
+    baseKey, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+  const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: iv }, key, data);
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+
+function esc(s) {
+  return String(s == null ? "" : s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+let vaultItems = [];
+let fulfillFilter = "all";
+function fulfillTag(p) {
+  if (p.fulfill === "stock") return '<div class="fulfill fulfill-stock">STOCK</div>';
+  return '<div class="fulfill fulfill-custom">MADE TO ORDER · ' + esc(p.fulfill).toUpperCase() + "</div>";
+}
+function render(items) {
+  vaultItems = items;
+  paintRows();
+}
+function paintRows() {
+  const tb = document.getElementById("rows");
+  tb.innerHTML = "";
+  const list = vaultItems.filter(p =>
+    fulfillFilter === "all" ||
+    (fulfillFilter === "custom" && p.fulfill !== "stock") ||
+    (fulfillFilter === "stock" && p.fulfill === "stock"));
+  list.forEach(p => {
+    const tr = document.createElement("tr");
+    const hasCost = typeof p.cost === "number";
+    const margin = hasCost ? (p.price - p.cost).toFixed(2) : null;
+    const thumb = p.thumb
+      ? '<img class="thumb" src="' + esc(p.thumb) + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">'
+      : "";
+    tr.innerHTML =
+      '<td>' + thumb + '<div class="pname">' + esc(p.name) + '</div><div class="cat">' + esc(p.cat) + " · " + esc(p.id) + "</div>" + fulfillTag(p) + "</td>" +
+      '<td class="cost">' + (hasCost ? "$" + p.cost.toFixed(2) : "—") + "</td>" +
+      '<td class="shop">$' + Number(p.price).toFixed(2) + "</td>" +
+      '<td class="margin">' + (margin !== null ? "+$" + margin : "—") + "</td>" +
+      '<td><a class="src" href="' + esc(p.url) + '" target="_blank" rel="noopener">OPEN SOURCE ↗</a></td>';
+    tb.appendChild(tr);
+  });
+  document.getElementById("count").textContent = list.length + " PRODUCTS · COSTS ARE WHAT YOU PAY · SHOP IS WHAT THEY PAY";
+  document.getElementById("gate").style.display = "none";
+  document.getElementById("vault").classList.add("open");
+}
+document.getElementById("filters").addEventListener("click", e => {
+  const b = e.target.closest(".fbtn");
+  if (!b) return;
+  fulfillFilter = b.dataset.f;
+  document.querySelectorAll(".fbtn").forEach(x => x.classList.toggle("on", x === b));
+  paintRows();
+});
+
+function deny() {
+  const e = document.getElementById("err");
+  e.textContent = "ACCESS DENIED";
+  const g = document.getElementById("gate");
+  g.classList.remove("shake"); void g.offsetWidth; g.classList.add("shake");
+  setTimeout(clearPin, 350);
+}
+
+const PIN_LENGTH = 4;
+let pin = "";
+const dots = Array.from(document.querySelectorAll("#dots .dot"));
+function paintDots() { dots.forEach((d, i) => d.classList.toggle("on", i < pin.length)); }
+function clearPin() { pin = ""; paintDots(); document.getElementById("err").textContent = ""; }
+
+async function tryUnlock() {
+  if (pin.length !== PIN_LENGTH) return;
+  const attempt = pin;
+  try {
+    const items = await unlock(attempt);
+    render(items);
+  } catch (err) { deny(); }
+}
+
+document.getElementById("pad").addEventListener("click", e => {
+  const b = e.target.closest(".key");
+  if (!b) return;
+  if (b.dataset.d && pin.length < PIN_LENGTH) {
+    pin += b.dataset.d;
+    paintDots();
+    if (pin.length === PIN_LENGTH) setTimeout(tryUnlock, 150);
+  } else if (b.dataset.fn === "back") {
+    pin = pin.slice(0, -1);
+    paintDots();
+  } else if (b.dataset.fn === "clear") {
+    clearPin();
+  }
+});
+// physical keyboard support (desktop)
+document.addEventListener("keydown", e => {
+  if (!document.getElementById("vault").classList.contains("open")) {
+    if (/^[0-9]$/.test(e.key) && pin.length < PIN_LENGTH) {
+      pin += e.key; paintDots();
+      if (pin.length === PIN_LENGTH) setTimeout(tryUnlock, 150);
+    } else if (e.key === "Backspace") { pin = pin.slice(0, -1); paintDots(); }
+  }
+});
+document.getElementById("lock").onclick = () => location.reload();
+
+// Some in-app browsers (links opened inside other apps) block the
+// unlock step. Detect it upfront and say so plainly.
+if (!(window.crypto && window.crypto.subtle)) {
+  document.getElementById("pad").style.display = "none";
+  document.getElementById("dots").style.display = "none";
+  const e = document.getElementById("err");
+  e.style.color = "var(--chrome)";
+  e.textContent = "THIS BROWSER BLOCKS UNLOCK — OPEN THIS PAGE IN SAFARI";
+}
 </script>
 </body>
 </html>
