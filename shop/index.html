@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+<title>DYINGTOLIVE.jp // SHOP</title>
+<meta name="description" content="Cheap parts. DM to order, Zelle to pay.">
+<link rel="icon" href="../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; border-radius: 0 !important; }
+  :root {
+    --black: #000000;
+    --panel: #0b0b0c;
+    --white: #ffffff;
+    --muted: #8f8f96;
+    --line: #202024;
+    --chrome-hi: #f4f4f7;
+    --chrome: #c9c9d4;
+    --chrome-lo: #63636d;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Roboto', -apple-system, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .display { font-family: 'Anton', 'Roboto', sans-serif; font-weight: 400; }
+  .chrome-text {
+    background: linear-gradient(180deg, #ffffff 0%, #d7d7e0 34%, #71717b 49%, #ececf2 60%, #ffffff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  ::selection { background: var(--chrome); color: #000; }
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #000; }
+  ::-webkit-scrollbar-thumb { background: #2a2a2f; border: 2px solid #000; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--chrome-lo); }
+
+  /* film grain */
+  .grain {
+    position: fixed; inset: -50%; z-index: 2000; pointer-events: none; opacity: .05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grain 7s steps(8) infinite;
+  }
+  @keyframes grain {
+    0%,100% { transform: translate(0,0); } 25% { transform: translate(-4%,3%); }
+    50% { transform: translate(3%,-4%); } 75% { transform: translate(-3%,-2%); }
+  }
+
+  /* ticker */
+  .ticker {
+    width: 100%; border-bottom: 1px solid var(--line);
+    overflow: hidden; white-space: nowrap; background: #000;
+    padding: 9px 0; position: relative; z-index: 60;
+  }
+  .ticker-inner { display: inline-block; animation: tick 24s linear infinite; }
+  .ticker span {
+    font-weight: 900; font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    padding: 0 18px; color: var(--muted);
+  }
+  .ticker span b { color: var(--chrome); font-weight: 900; }
+  @keyframes tick { to { transform: translateX(-50%); } }
+
+  /* header */
+  header.top {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(0,0,0,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    padding: 14px 18px;
+  }
+  header.top .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  header.top .brand img { width: 40px; height: 40px; display: block; }
+  header.top .wordmark {
+    font-family: 'Anton', sans-serif; font-weight: 400;
+    font-size: 22px; letter-spacing: 4px; text-decoration: none;
+    color: var(--white); text-transform: uppercase;
+  }
+  header.top .wordmark span { color: var(--chrome-lo); }
+  .cart-btn {
+    position: absolute; right: 16px;
+    background: linear-gradient(180deg, #f2f2f6, #c9c9d4 55%, #a9a9b4);
+    border: none; color: #000;
+    font-family: 'Anton', sans-serif; font-weight: 400;
+    font-size: 14px; letter-spacing: 2px;
+    padding: 10px 16px; cursor: pointer; text-transform: uppercase;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .cart-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(201,201,212,.25); }
+  .cart-btn .count {
+    display: inline-block; background: #000; color: #fff;
+    min-width: 20px; height: 20px; line-height: 20px; text-align: center;
+    font-size: 11px; margin-left: 8px; padding: 0 4px; font-family: 'Roboto', sans-serif; font-weight: 900;
+  }
+
+  /* section headers */
+  .sec-head {
+    font-family: 'Anton', sans-serif; font-weight: 400;
+    font-size: 34px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 38px 18px 18px; max-width: 1200px; margin: 0 auto;
+  }
+  .sec-head .slash { color: var(--chrome-lo); }
+
+  /* hero */
+  .hero { text-align: center; padding: 58px 20px 14px; position: relative; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: -30px 0;
+    background: url('../img/ambient-bg.jpg') center/cover;
+    opacity: .45; pointer-events: none;
+  }
+  .hero > * { position: relative; z-index: 2; }
+  .floaties { position: absolute; inset: 0; pointer-events: none; }
+  .floaties img {
+    position: absolute; width: 120px; opacity: .2;
+    animation: drift 8s ease-in-out infinite alternate;
+  }
+  .floaties .f1 { top: 8%; left: 4%; animation-duration: 7s; }
+  .floaties .f2 { top: 14%; right: 5%; width: 150px; animation-duration: 10s; animation-delay: -4s; }
+  .floaties .f3 { bottom: 6%; left: 10%; width: 100px; animation-duration: 9s; animation-delay: -2s; }
+  .floaties .f4 { bottom: 10%; right: 9%; width: 110px; animation-duration: 8s; animation-delay: -6s; }
+  @keyframes drift {
+    from { transform: translateY(-14px) rotate(-3deg); }
+    to { transform: translateY(14px) rotate(3deg); }
+  }
+  .hero h1 {
+    font-family: 'Anton', sans-serif; font-weight: 400;
+    font-size: clamp(52px, 10vw, 110px);
+    letter-spacing: 3px; text-transform: uppercase; line-height: .95;
+    animation: flicker 7s infinite;
+  }
+  @keyframes flicker {
+    0%,100% { opacity: 1; } 91% { opacity: 1; } 92% { opacity: .6; }
+    93% { opacity: 1; } 95% { opacity: .8; } 96% { opacity: 1; }
+  }
+  .hero h1 .star { color: var(--chrome); -webkit-text-fill-color: var(--chrome); }
+  .hero p {
+    margin-top: 16px; color: var(--muted); font-size: 13px;
+    letter-spacing: 3px; text-transform: uppercase; font-weight: 700;
+  }
+  .hero p b { color: var(--white); }
+
+  /* browse tiles */
+  .tiles {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    padding: 0 18px; max-width: 1200px; margin: 0 auto;
+  }
+  @media (max-width: 640px) { .tiles { gap: 6px; } }
+  .tile {
+    position: relative; aspect-ratio: 1; overflow: hidden; cursor: pointer;
+    border: 1px solid var(--line); background: var(--panel); padding: 0;
+    transition: border-color .18s ease, transform .18s ease;
+  }
+  .tile img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    filter: brightness(.6) saturate(.85);
+    transition: filter .2s ease, transform .3s ease;
+  }
+  .tile:hover { border-color: var(--chrome); transform: translateY(-2px); }
+  .tile:hover img { filter: brightness(.9) saturate(1); transform: scale(1.05); }
+  .tile span {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    display: block; text-align: center;
+    font-family: 'Anton', sans-serif; font-weight: 400;
+    font-size: 14px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--white); padding: 10px 6px;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,.88) 60%);
+  }
+  .tile.active { outline: 2px solid var(--chrome); outline-offset: -2px; }
+  .tile.active img { filter: brightness(.9); }
+  .tile.active span { color: var(--chrome); }
+
+  /* product grid */
+  .grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    padding: 0 18px 30px; max-width: 1200px; margin: 0 auto;
+  }
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 8px; } }
+  .card {
+    background: #050506; border: 1px solid var(--line);
+    display: flex; flex-direction: column; position: relative;
+    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    animation: cardIn .5s cubic-bezier(.2,.9,.25,1) both;
+  }
+  @keyframes cardIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .card:hover { border-color: var(--chrome); transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0,0,0,.65); }
+  .card .imgwrap { position: relative; aspect-ratio: 1; background: #050505; overflow: hidden; }
+  .card .imgwrap::after {
+    content: ""; position: absolute; top: 0; bottom: 0; width: 50%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,.13), transparent);
+    left: -70%; transform: skewX(-18deg); transition: left .55s ease; pointer-events: none;
+  }
+  .card:hover .imgwrap::after { left: 130%; }
+  .card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease; }
+  .card:hover img { transform: scale(1.05); }
+  .card .badge {
+    position: absolute; top: 8px; right: 8px; z-index: 2;
+    background: rgba(0,0,0,.72); border: 1px solid var(--line); color: var(--chrome);
+    font-size: 9px; font-weight: 900; letter-spacing: 2px;
+    padding: 4px 8px; text-transform: uppercase; backdrop-filter: blur(4px);
+  }
+  .card .newtag {
+    position: absolute; top: 8px; left: 8px; z-index: 2;
+    background: linear-gradient(180deg, #f2f2f6, #c9c9d4);
+    color: #000; font-size: 9px; font-weight: 900; letter-spacing: 2px;
+    padding: 4px 8px; text-transform: uppercase;
+    animation: pulseTag 1.6s ease-in-out infinite;
+  }
+  @keyframes pulseTag { 0%,100% { opacity: 1; } 50% { opacity: .72; } }
+  .card .body { padding: 13px 11px 15px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .card .name {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; line-height: 1.5; color: var(--white);
+  }
+  .card .note { font-size: 11px; color: var(--muted); line-height: 1.5; }
+  .card .row { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 9px; gap: 8px; }
+  .card .price {
+    font-family: 'Anton', sans-serif; font-weight: 400; font-size: 21px;
+    color: var(--chrome); letter-spacing: 1px;
+  }
+  .add {
+    background: #1b1b1f; border: 1px solid var(--line); color: var(--white);
+    font-weight: 900; font-size: 11px; letter-spacing: 2px;
+    padding: 10px 14px; cursor: pointer; text-transform: uppercase;
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .add:hover { background: var(--chrome); border-color: var(--chrome); color: #000; }
+  .add.added { background: var(--chrome); border-color: var(--chrome); color: #000; }
+
+  .empty { text-align: center; padding: 70px 24px; color: var(--muted); }
+  .empty .big { font-size: 40px; color: var(--chrome); margin-bottom: 14px; }
+  .empty h2 { letter-spacing: 4px; font-size: 20px; color: var(--white); margin-bottom: 10px; text-transform: uppercase; }
+  .empty p { font-size: 13px; line-height: 1.7; letter-spacing: 1px; }
+
+  /* how it works strip */
+  .how {
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    max-width: 1200px; margin: 14px auto 0;
+    display: grid; grid-template-columns: repeat(3, 1fr); text-align: center;
+    background: linear-gradient(180deg, #0a0a0c, #050506);
+  }
+  @media (max-width: 640px) { .how { grid-template-columns: 1fr; } .how div + div { border-top: 1px solid var(--line); } }
+  .how div { padding: 28px 16px; }
+  .how div + div { border-left: 1px solid var(--line); }
+  .how .n { color: var(--chrome); font-weight: 900; font-size: 12px; letter-spacing: 4px; }
+  .how h3 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 18px; letter-spacing: 3px; margin: 10px 0 6px; text-transform: uppercase; }
+  .how p { font-size: 12px; color: var(--muted); letter-spacing: .5px; }
+
+  /* footer */
+  footer.page { border-top: 1px solid var(--line); margin-top: 44px; padding: 38px 18px 44px; text-align: center; background: #000; }
+  footer.page .dm { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 24px; letter-spacing: 3px; text-transform: uppercase; }
+  footer.page .dm span { color: var(--chrome); }
+  footer.page .links { margin: 20px 0; display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+  footer.page .links a {
+    color: var(--white); text-decoration: none; font-size: 12px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+  }
+  footer.page .links a:hover { color: var(--chrome); }
+  footer.page .fine { color: var(--muted); font-size: 11px; letter-spacing: 5px; margin-top: 14px; text-transform: uppercase; }
+
+  /* drawer */
+  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.72); opacity: 0; pointer-events: none; transition: opacity .2s ease; z-index: 90; }
+  .overlay.open { opacity: 1; pointer-events: auto; }
+  .drawer {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: min(420px, 94vw);
+    background: #000; border-left: 1px solid var(--line);
+    z-index: 100; transform: translateX(105%); transition: transform .25s ease;
+    display: flex; flex-direction: column;
+  }
+  .drawer.open { transform: translateX(0); }
+  .drawer header { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--line); position: static; }
+  .drawer header h2 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 19px; letter-spacing: 3px; text-transform: uppercase; }
+  .drawer header h2 span { color: var(--chrome); }
+  .close { background: none; border: none; color: var(--muted); font-size: 22px; cursor: pointer; }
+  .close:hover { color: var(--white); }
+  .drawer .items { flex: 1; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 12px; }
+  .line { display: flex; gap: 12px; align-items: center; background: var(--panel); border: 1px solid var(--line); padding: 10px; }
+  .line img { width: 56px; height: 56px; object-fit: cover; background: #000; }
+  .line .info { flex: 1; }
+  .line .info .n { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .line .info .p { font-size: 13px; color: var(--chrome); font-weight: 900; margin-top: 3px; }
+  .qty { display: flex; align-items: center; gap: 10px; }
+  .qty button { width: 28px; height: 28px; border: 1px solid var(--line); background: none; color: var(--white); font-size: 15px; cursor: pointer; }
+  .qty button:hover { border-color: var(--chrome); }
+  .qty span { font-size: 14px; font-weight: 700; min-width: 18px; text-align: center; }
+  .drawer .notes { padding: 0 20px 12px; }
+  .drawer .notes label { font-size: 10px; letter-spacing: 3px; color: var(--muted); display: block; margin-bottom: 7px; text-transform: uppercase; font-weight: 700; }
+  .drawer .notes input { width: 100%; background: var(--panel); border: 1px solid var(--line); color: var(--white); padding: 11px 13px; font-size: 13px; font-family: 'Roboto', sans-serif; }
+  .drawer .notes input:focus { outline: none; border-color: var(--chrome); }
+  .drawer footer { border-top: 1px solid var(--line); padding: 16px 20px 22px; margin-top: 0; }
+  .total-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; font-weight: 900; margin-bottom: 14px; letter-spacing: 2px; text-transform: uppercase; }
+  .total-row .amt { color: var(--chrome); font-family: 'Anton', sans-serif; font-weight: 400; font-size: 26px; letter-spacing: 1px; }
+  .step { margin-bottom: 14px; }
+  .step .step-label { font-size: 10px; letter-spacing: 2px; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; font-weight: 700; }
+  .step .step-label b { color: var(--chrome); }
+  .bigbtn {
+    display: block; width: 100%; text-align: center;
+    background: linear-gradient(180deg, #f2f2f6, #c9c9d4 55%, #a9a9b4);
+    color: #000; text-decoration: none; border: none; cursor: pointer;
+    font-family: 'Anton', sans-serif; font-weight: 400; letter-spacing: 3px; font-size: 17px; text-transform: uppercase;
+    padding: 15px; margin-bottom: 9px;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .bigbtn:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(201,201,212,.25); }
+  .notice {
+    border: 1px dashed #a855f7;
+    padding: 10px 12px;
+    margin-top: 10px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    line-height: 1.7;
+    font-weight: 700;
+  }
+  .ghostbtn {
+    display: block; width: 100%; text-align: center;
+    background: transparent; color: var(--white);
+    border: 1px solid #3a3a40; cursor: pointer;
+    font-weight: 700; letter-spacing: 2px; font-size: 12px; text-transform: uppercase;
+    padding: 13px; font-family: 'Roboto', sans-serif;
+  }
+  .ghostbtn:hover { border-color: var(--chrome); }
+  .zelle-box { background: var(--panel); border: 1px dashed var(--chrome-lo); padding: 14px; text-align: center; margin-bottom: 9px; }
+  .zelle-box .num { font-size: 20px; font-weight: 900; letter-spacing: 2px; margin: 6px 0; }
+  .zelle-box .amt { font-size: 12px; color: var(--muted); letter-spacing: 1px; }
+  .zelle-box .amt b { color: var(--chrome); font-size: 16px; }
+  .zelle-box .lbl { font-size: 10px; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; }
+  .hint { font-size: 11px; color: var(--muted); line-height: 1.6; text-align: center; margin-top: 10px; letter-spacing: 1px; }
+  .cart-empty { text-align: center; color: var(--muted); padding: 50px 20px; font-size: 13px; line-height: 1.8; letter-spacing: 1px; text-transform: uppercase; }
+  .toast {
+    position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--chrome); color: #000; font-size: 12px; font-weight: 900; letter-spacing: 2px;
+    padding: 12px 22px; opacity: 0; pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease; z-index: 200; text-transform: uppercase;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* scroll reveal */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s cubic-bezier(.2,.9,.25,1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* originals rail */
+  .rail-wrap { max-width: 1200px; margin: 0 auto; padding: 0 18px 8px; }
+  .rail { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; }
+  .ocard {
+    flex: 0 0 236px; scroll-snap-align: start;
+    background: #050506; border: 1px solid var(--line);
+    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  @media (min-width: 700px) { .ocard { flex-basis: 272px; } }
+  .ocard:hover { transform: translateY(-4px); border-color: var(--chrome); box-shadow: 0 14px 40px rgba(0,0,0,.65); }
+  .ocard .imgwrap { position: relative; aspect-ratio: 1; overflow: hidden; background: #000; }
+  .ocard img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease; }
+  .ocard:hover img { transform: scale(1.06); }
+  .ocard .newtag {
+    position: absolute; top: 8px; left: 8px; z-index: 2;
+    background: linear-gradient(180deg, #f2f2f6, #c9c9d4);
+    color: #000; font-size: 9px; font-weight: 900; letter-spacing: 2px;
+    padding: 4px 8px; text-transform: uppercase;
+    animation: pulseTag 1.6s ease-in-out infinite;
+  }
+  .ocard .obody { padding: 12px 11px 14px; }
+  .ocard .oname { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+  .ocard .onote { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .ocard .orow { display: flex; align-items: center; justify-content: space-between; margin-top: 9px; }
+  .ocard .oprice { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 21px; color: var(--chrome); letter-spacing: 1px; }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="ticker"><div class="ticker-inner" id="ticker"></div></div>
+
+<header class="top">
+  <a class="brand" href="../index.html" aria-label="DYINGTOLIVE.jp home">
+    <img src="../logo.gif" alt="DYINGTOLIVE.jp logo">
+    <span class="wordmark">DYINGTOLIVE<span>.jp</span></span>
+  </a>
+  <button class="cart-btn" id="openCart">CART<span class="count" id="cartCount">0</span></button>
+</header>
+
+<div class="hero">
+  <div class="floaties" aria-hidden="true">
+    <img class="f1" src="img/d1.jpg" alt="">
+    <img class="f2" src="img/d2.jpg" alt="">
+    <img class="f3" src="img/d4.jpg" alt="">
+    <img class="f4" src="img/d3.jpg" alt="">
+  </div>
+  <h1 class="chrome-text"><span class="star">★</span> THE SHOP <span class="star">★</span></h1>
+  <p>cheap parts. <b>static builds only.</b></p>
+</div>
+
+<h2 class="sec-head reveal"><span class="slash">//</span> DYING TO LIVE ORIGINALS</h2>
+<div class="rail-wrap reveal"><div class="rail" id="originalsRail"></div></div>
+
+<h2 class="sec-head reveal"><span class="slash">//</span> BROWSE</h2>
+<div class="tiles reveal" id="tiles">
+  <button class="tile active" data-cat="all"><img src="img/a2.jpg" alt="All"><span>ALL ★</span></button>
+  <button class="tile" data-cat="wheels"><img src="img/a6.jpg" alt="Steering wheels"><span>STEERING WHEELS</span></button>
+  <button class="tile" data-cat="custom"><img src="img/b7.jpg" alt="Custom"><span>CUSTOM</span></button>
+  <button class="tile" data-cat="mats" style="grid-column: span 1;"><img src="img/mat-wave.jpg" alt="Floor mats"><span>FLOOR MATS</span></button>
+  <button class="tile" data-cat="tsurikawa"><img src="img/t1.jpg" alt="Tsurikawa"><span>TSURIKAWA</span></button>
+  <button class="tile" data-cat="banners"><img src="img/t5.jpg" alt="Banners"><span>BANNERS</span></button>
+  <button class="tile" data-cat="knobs"><img src="img/t8.jpg" alt="Shift knobs"><span>SHIFT KNOBS</span></button>
+  <button class="tile" data-cat="frames"><img src="img/t3.jpg" alt="Plate frames"><span>PLATE FRAMES</span></button>
+  <button class="tile" data-cat="led"><img src="img/t12.jpg" alt="LED"><span>LED</span></button>
+  <button class="tile" data-cat="decals"><img src="img/d4.jpg" alt="Decals"><span>DECALS</span></button>
+  <button class="tile" data-cat="fresh"><img src="img/t14.jpg" alt="Fresheners"><span>FRESHENERS</span></button>
+</div>
+
+<h2 class="sec-head"><span class="slash">//</span> THE LINEUP</h2>
+<div class="grid" id="grid"></div>
+<div class="empty" id="emptyState" style="display:none">
+  <div class="big">★</div>
+  <h2>FIRST DROP LOADING</h2>
+  <p>nothing on the shelf yet.<br>DM <b>@dyingtolive.jp</b> and tell us what you need.</p>
+</div>
+
+<div class="how">
+  <div><div class="n">01</div><h3>DM THE ORDER</h3><p>add to cart, copy the order, paste it in our DM.</p></div>
+  <div><div class="n">02</div><h3>ZELLE THE TOTAL</h3><p>send the exact total to (713) 351-9285.</p></div>
+  <div><div class="n">03</div><h3>WE SHIP</h3><p>we confirm, we order, it ships to you. ★</p></div>
+</div>
+
+<footer class="page">
+  <div class="dm">DM US <span>★</span> @dyingtolive.jp</div>
+  <div class="links">
+    <a href="../index.html">HOME</a>
+    <a href="https://instagram.com/dyingtolive.jp" target="_blank" rel="noopener">INSTAGRAM</a>
+    <a href="https://www.zellepay.com/" target="_blank" rel="noopener">ZELLE</a>
+  </div>
+  <div class="fine">★ DYINGTOLIVE.jp ★</div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Cart">
+  <header>
+    <h2>YOUR CART <span>★</span></h2>
+    <button class="close" id="closeCart" aria-label="Close cart">✕</button>
+  </header>
+  <div class="items" id="cartItems"></div>
+  <div class="notes">
+    <label for="orderNotes">CUSTOM TEXT / NOTES</label>
+    <input id="orderNotes" type="text" placeholder="banner text, knob engraving, car model…">
+  </div>
+  <footer id="cartFooter"></footer>
+</aside>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ticker
+(function () {
+  const items = ['<b>★</b> NEW DECAL DROP', 'DM TO ORDER', '<b>★</b> DYINGTOLIVE.JP', 'STATIC BUILDS ONLY', '<b>★</b> DYING TO LIVE ORIGINALS'];
+  const half = items.map(t => '<span>' + t + '</span>').join('');
+  document.getElementById('ticker').innerHTML = half + half;
+})();
+
+/* ============ CATALOG — add new products here ============
+   { id, cat, name, price, note, img } — fresh:1 shows a NEW DROP tag
+   cat: "wheels" | "custom" | "mats" | "tsurikawa" | "banners" | "knobs" |
+        "frames" | "led" | "decals" | "fresh" — img is a path in shop/img/ */
+const CATS = { wheels: "STEERING WHEEL", custom: "CUSTOM", mats: "FLOOR MATS",
+  tsurikawa: "TSURIKAWA", banners: "BANNERS", knobs: "SHIFT KNOBS", frames: "PLATE FRAMES",
+  led: "LED", decals: "DECALS", fresh: "FRESHENERS" };
+const PRODUCTS = [
+  { id: "a2", cat: "wheels", name: "Suede Deep Dish — Blue Stitch", price: 59,
+    note: "350mm · 6-hole · hub adapter not included",
+    img: "img/a2.jpg" },
+  { id: "a6", cat: "wheels", name: "Purple Trim 350mm Wheel", price: 69,
+    note: "350mm · deep dish · hub adapter not included",
+    img: "img/a6.jpg" },
+  { id: "b4", cat: "custom", name: "Custom Japanese Text Banner", price: 18,
+    note: "your text in japanese · windshield size · put the text in notes below",
+    img: "img/b4.jpg" },
+  { id: "b7", cat: "custom", name: "Laser Engraved Shift Knob", price: 45,
+    note: "laser engraved with your text · put the text in notes below",
+    img: "img/b7.jpg" },
+  { id: "m1", cat: "mats", name: "Great Wave 4-Piece Mat Set", price: 45,
+    note: "kanagawa wave · full 4-pc set · universal fit",
+    img: "img/mat-wave.jpg" },
+  { id: "m2", cat: "mats", name: "Type R Racing 4-Piece Mats", price: 55,
+    note: "type r style · full 4-pc set · universal fit",
+    img: "img/mat-typer.jpg" },
+  { id: "m3", cat: "mats", name: "JDM Leaf 4-Piece Mat Set", price: 55,
+    note: "jdm leaf logo · full 4-pc set · universal fit",
+    img: "img/mat-leaf.jpg" },
+  { id: "t1", cat: "tsurikawa", name: "Heart Ring Tsurikawa Handle", price: 9,
+    note: "heart ring · the jdm staple · hangs from grab handle",
+    img: "img/t1.jpg" },
+  { id: "t2", cat: "tsurikawa", name: "JDM Wanted Tow Strap", price: 12,
+    note: "anime graffiti strap · bumper mount · pairs with the tsurikawa",
+    img: "img/t2.jpg" },
+  { id: "t3", cat: "frames", name: "Aluminum JDM Plate Frame", price: 11,
+    note: "aluminum · universal fit · clean jdm look",
+    img: "img/t3.jpg" },
+  { id: "t4", cat: "frames", name: "Aluminum Plate Frames — 2 Pack", price: 12,
+    note: "front + rear set · waterproof · universal fit",
+    img: "img/t4.jpg" },
+  { id: "t5", cat: "banners", name: "ANTISOCIAL Windshield Banner", price: 8,
+    note: "vinyl · windshield size · peak antisocial energy",
+    img: "img/t5.jpg" },
+  { id: "t6", cat: "banners", name: "ULTRA SLOW Japanese Banner", price: 11,
+    note: "japanese text · waterproof vinyl · slow car pride",
+    img: "img/t6.jpg" },
+  { id: "t7", cat: "banners", name: "JDM Sunstrip Decal — 98.5cm", price: 11,
+    note: "full-width sunstrip · waterproof · non-fading",
+    img: "img/t7.jpg" },
+  { id: "t8", cat: "knobs", name: "Bride-Style Shift Knob 13cm", price: 20,
+    note: "bride style · 13cm · 8/10/12mm adapters included",
+    img: "img/t8.jpg" },
+  { id: "t9", cat: "knobs", name: "Burnt Titanium Shifter Stick 18cm", price: 18,
+    note: "burnt-ti finish · 18cm aluminum · universal",
+    img: "img/t9.jpg" },
+  { id: "t10", cat: "knobs", name: "8-Ball Shift Knob", price: 22,
+    note: "classic 8-ball · aluminum adapter included",
+    img: "img/t10.jpg" },
+  { id: "t11", cat: "led", name: "EL Wire Interior Kit — USB", price: 8,
+    note: "usb powered · 118in · cheapest glow-up on the shelf",
+    img: "img/t11.jpg" },
+  { id: "t12", cat: "led", name: "RGB Ambient Kit — App + Music Sync", price: 18,
+    note: "app + remote + music sync · 118in rgb neon",
+    img: "img/t12.jpg" },
+  { id: "t13", cat: "decals", name: "Anime Peeker Decal", price: 11,
+    note: "peeker eyes · rear window essential · vinyl",
+    img: "img/t13.jpg" },
+  { id: "d1", cat: "decals", name: "White Cross Decal — 6in", price: 15, fresh: 1,
+    note: "white die-cut vinyl · our cross logo · made to order ★",
+    img: "img/d1.jpg" },
+  { id: "d2", cat: "decals", name: "URL Windshield Decal", price: 15, fresh: 1,
+    note: "white die-cut vinyl · long windshield format · made to order ★",
+    img: "img/d2.jpg" },
+  { id: "d3", cat: "decals", name: "Cross Banner Decal — 6in", price: 15, fresh: 1,
+    note: "white die-cut vinyl · gothic cross banner · made to order ★",
+    img: "img/d3.jpg" },
+  { id: "d4", cat: "decals", name: "Reaper Peeker Decal — 6in", price: 15, fresh: 1,
+    note: "white die-cut vinyl · reaper peeker · made to order ★",
+    img: "img/d4.jpg" },
+  { id: "t14", cat: "fresh", name: "Leaf Air Fresheners — Multi Pack", price: 22,
+    note: "leaf shape · multi-pack · split as add-ons",
+    img: "img/t14.jpg" },
+];
+
+/* ============ catalog render + category filter ============ */
+const grid = document.getElementById("grid");
+const emptyState = document.getElementById("emptyState");
+let activeCat = "all";
+const money = n => "$" + n.toFixed(2);
+
+function renderGrid() {
+  grid.innerHTML = "";
+  const list = PRODUCTS.filter(p => activeCat === "all" || p.cat === activeCat);
+  emptyState.style.display = PRODUCTS.length ? "none" : "block";
+  list.forEach((p, i) => {
+    const el = document.createElement("div");
+    el.className = "card";
+    el.style.animationDelay = Math.min(i * 35, 420) + "ms";
+    el.innerHTML =
+      '<div class="imgwrap"><img src="' + p.img + '" alt="' + p.name + '" loading="lazy">' +
+      (p.fresh ? '<span class="newtag">NEW DROP</span>' : "") +
+      '<span class="badge">' + (CATS[p.cat] || p.cat.toUpperCase()) + "</span></div>" +
+      '<div class="body"><div class="name">' + p.name + '</div>' +
+      '<div class="note">' + p.note + "</div>" +
+      '<div class="row"><div class="price">' + money(p.price) + "</div>" +
+      '<button class="add" data-id="' + p.id + '">ADD +</button></div></div>';
+    grid.appendChild(el);
+  });
+}
+grid.addEventListener("click", e => {
+  const btn = e.target.closest(".add");
+  if (!btn) return;
+  addToCart(btn.dataset.id);
+  btn.textContent = "ADDED ✓";
+  btn.classList.add("added");
+  setTimeout(() => { btn.textContent = "ADD +"; btn.classList.remove("added"); }, 1200);
+});
+function setCat(cat) {
+  activeCat = cat;
+  document.querySelectorAll(".tile").forEach(t => t.classList.toggle("active", t.dataset.cat === cat));
+  renderGrid();
+  document.getElementById("grid").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+document.getElementById("tiles").addEventListener("click", e => {
+  const tile = e.target.closest(".tile");
+  if (!tile) return;
+  setCat(tile.dataset.cat);
+});
+renderGrid();
+
+/* ============ DYING TO LIVE ORIGINALS rail ============ */
+(function () {
+  const rail = document.getElementById("originalsRail");
+  PRODUCTS.filter(p => p.fresh).forEach(p => {
+    const el = document.createElement("div");
+    el.className = "ocard";
+    el.innerHTML =
+      '<div class="imgwrap"><img src="' + p.img + '" alt="' + p.name + '" loading="lazy">' +
+      '<span class="newtag">NEW DROP</span></div>' +
+      '<div class="obody"><div class="oname">' + p.name + '</div>' +
+      '<div class="onote">' + p.note + "</div>" +
+      '<div class="orow"><div class="oprice">' + money(p.price) + "</div>" +
+      '<button class="add" data-id="' + p.id + '">ADD +</button></div></div>';
+    rail.appendChild(el);
+  });
+  rail.addEventListener("click", e => {
+    const btn = e.target.closest(".add");
+    if (!btn) return;
+    addToCart(btn.dataset.id);
+    btn.textContent = "ADDED ✓";
+    btn.classList.add("added");
+    setTimeout(() => { btn.textContent = "ADD +"; btn.classList.remove("added"); }, 1200);
+  });
+})();
+
+/* ============ deep link: shop/?cat=decals ============ */
+(function () {
+  const q = new URLSearchParams(location.search).get("cat");
+  if (q && (q === "all" || CATS[q])) setCat(q);
+})();
+
+/* ============ scroll reveal ============ */
+(function () {
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+  }), { threshold: .1 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+})();
+
+/* ============ cart ============ */
+const ZELLE_NUMBER = "(713) 351-9285";
+const IG_DM_URL = "https://ig.me/m/dyingtolive.jp";
+let cart = {};
+try { cart = JSON.parse(localStorage.getItem("dtl_cart") || "{}"); } catch (e) { cart = {}; }
+const save = () => localStorage.setItem("dtl_cart", JSON.stringify(cart));
+const cartQty = () => Object.values(cart).reduce((a, b) => a + b, 0);
+const cartTotal = () => Object.entries(cart).reduce((s, [id, q]) => {
+  const p = PRODUCTS.find(x => x.id === id);
+  return p ? s + p.price * q : s;
+}, 0);
+
+function addToCart(id) {
+  cart[id] = (cart[id] || 0) + 1;
+  save(); renderCart();
+  toast("ADDED TO CART ★");
+}
+function setQty(id, q) {
+  if (q <= 0) delete cart[id]; else cart[id] = q;
+  save(); renderCart();
+}
+
+function renderCart() {
+  document.getElementById("cartCount").textContent = cartQty();
+  const wrap = document.getElementById("cartItems");
+  const footer = document.getElementById("cartFooter");
+  const ids = Object.keys(cart);
+  if (!ids.length) {
+    wrap.innerHTML = '<div class="cart-empty">cart is empty.<br>go grab something cheap ★</div>';
+    footer.innerHTML = "";
+    return;
+  }
+  wrap.innerHTML = "";
+  ids.forEach(id => {
+    const p = PRODUCTS.find(x => x.id === id);
+    if (!p) return;
+    const row = document.createElement("div");
+    row.className = "line";
+    row.innerHTML =
+      '<img src="' + p.img + '" alt="">' +
+      '<div class="info"><div class="n">' + p.name + '</div><div class="p">' + money(p.price) + "</div></div>" +
+      '<div class="qty"><button data-a="-" data-id="' + id + '">−</button><span>' + cart[id] +
+      '</span><button data-a="+" data-id="' + id + '">+</button></div>';
+    wrap.appendChild(row);
+  });
+  wrap.onclick = e => {
+    const b = e.target.closest("button[data-a]");
+    if (!b) return;
+    const id = b.dataset.id;
+    setQty(id, (cart[id] || 0) + (b.dataset.a === "+" ? 1 : -1));
+  };
+  const total = cartTotal();
+  footer.innerHTML =
+    '<div class="total-row"><span>TOTAL</span><span class="amt">' + money(total) + "</span></div>" +
+    '<div class="step"><div class="step-label"><b>STEP 1</b> — SEND THE ORDER TO OUR DM</div>' +
+    '<button class="bigbtn" id="dmCheckout">PLACE ORDER ★</button>' +
+    '<div class="notice">' + purpleLetters(WARNING_TEXT) + "</div></div>" +
+    '<div class="step"><div class="step-label"><b>STEP 2</b> — PAY FOR YOUR ORDER WITH ZELLE</div>' +
+    '<div class="zelle-box"><div class="lbl">ZELLE TO</div>' +
+    '<div class="num">' + ZELLE_NUMBER + '</div>' +
+    '<div class="amt">AMOUNT REQUESTED: <b>' + money(total) + "</b></div></div>" +
+    '<button class="ghostbtn" id="copyZelle">COPY ZELLE DETAILS</button></div>' +
+    '<div class="hint">shoots you straight to our DM —<br>paste the order and hit send ★</div>';
+  document.getElementById("dmCheckout").onclick = checkoutDM;
+  document.getElementById("copyZelle").onclick = copyZelle;
+}
+
+function orderText() {
+  const notes = document.getElementById("orderNotes").value.trim();
+  let lines = ["★ DYINGTOLIVE ORDER ★", ""];
+  Object.entries(cart).forEach(([id, q]) => {
+    const p = PRODUCTS.find(x => x.id === id);
+    if (p) lines.push(q + "x " + p.name + " — " + money(p.price * q));
+  });
+  if (notes) lines.push("", "PERSONALIZATION / NOTES: " + notes);
+  lines.push("", "TOTAL: " + money(cartTotal()), "",
+    ">>> PAY FOR YOUR ORDER NOW VIA ZELLE <<<",
+    ZELLE_NUMBER + " — send " + money(cartTotal()));
+  return lines.join("\n");
+}
+
+function copyText(t, msg) {
+  const done = () => toast(msg);
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(t).then(done).catch(() => fallbackCopy(t, done));
+  } else fallbackCopy(t, done);
+}
+function fallbackCopy(t, done) {
+  const ta = document.createElement("textarea");
+  ta.value = t;
+  ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); done(); } catch (e) { toast("COPY FAILED — LONG-PRESS TO COPY"); }
+  document.body.removeChild(ta);
+}
+
+function checkoutDM() {
+  // Copy the auto-built order, then shoot straight to the DM thread.
+  // Synchronous window.open inside the click gesture so it never gets blocked.
+  copyText(orderText(), "ORDER COPIED — PASTE IT IN THE DM ★");
+  window.open(IG_DM_URL, "_blank");
+}
+function copyZelle() {
+  copyText("Zelle: " + ZELLE_NUMBER + "\nAmount: " + money(cartTotal()) + "\nFor: DYINGTOLIVE order",
+    "ZELLE DETAILS COPIED ★");
+}
+
+/* ============ drawer + toast ============ */
+const PURPLES = ["#e9d5ff", "#c084fc", "#a855f7", "#8b5cf6", "#7c3aed", "#9333ea"];
+function purpleLetters(text) {
+  let out = "", j = 0;
+  for (const ch of text) {
+    if (ch === " " || ch === "\n") { out += ch; continue; }
+    const safe = ch.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    out += '<span style="color:' + PURPLES[j % PURPLES.length] + '">' + safe + "</span>";
+    j++;
+  }
+  return out;
+}
+const WARNING_TEXT = "★ HEADS UP — this opens our Instagram DM and copies your order details to your clipboard. Paste it in the chat and hit send.";
+const drawer = document.getElementById("drawer");
+const overlay = document.getElementById("overlay");
+const openDrawer = () => { renderCart(); drawer.classList.add("open"); overlay.classList.add("open"); };
+const closeDrawer = () => { drawer.classList.remove("open"); overlay.classList.remove("open"); };
+document.getElementById("openCart").onclick = openDrawer;
+document.getElementById("closeCart").onclick = closeDrawer;
+overlay.onclick = closeDrawer;
+
+let toastTimer;
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+}
+
+renderCart();
+</script>
+</body>
+</html>
