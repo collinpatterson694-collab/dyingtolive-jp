@@ -275,13 +275,6 @@
     padding: 4px 8px; text-transform: uppercase;
     animation: pulseTag 1.6s ease-in-out infinite;
   }
-  .card .mtotag, .ocard .mtotag, .qv-imgwrap .mtotag {
-    position: absolute; top: 8px; left: 8px; z-index: 2;
-    background: rgba(0,0,0,.72); border: 1px solid var(--amber); color: var(--amber);
-    font-size: 9px; font-weight: 900; letter-spacing: 2px;
-    padding: 4px 8px; text-transform: uppercase; backdrop-filter: blur(4px);
-  }
-  .card .mtotag.below, .ocard .mtotag.below, .qv-imgwrap .mtotag.below { top: 36px; }
   @keyframes pulseTag { 0%,100% { opacity: 1; } 50% { opacity: .72; } }
   .card .body { padding: 13px 11px 15px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
   .card .name {
@@ -603,7 +596,6 @@
   <div class="qv-imgwrap">
     <img id="qvImg" src="" alt="">
     <span class="newtag" id="qvNew" style="display:none">NEW DROP</span>
-    <span class="mtotag" id="qvMto" style="display:none">MADE TO ORDER</span>
   </div>
   <div class="qv-body">
     <div class="qv-cat" id="qvCat"></div>
@@ -698,16 +690,16 @@ const PRODUCTS = [
   { id: "t13", cat: "decals", name: "Anime Peeker Decal", price: 11,
     note: "peeker eyes · rear window essential · vinyl",
     img: "img/t13.jpg" },
-  { id: "d1", cat: "decals", name: "White Cross Decal — 6in", price: 15, fresh: 1, mto: 1,
+  { id: "d1", cat: "decals", name: "White Cross Decal — 6in", price: 15, fresh: 1,
     note: "white die-cut vinyl · our cross logo · made to order ★",
     img: "img/d1.jpg" },
-  { id: "d2", cat: "decals", name: "URL Windshield Decal", price: 15, fresh: 1, mto: 1,
+  { id: "d2", cat: "decals", name: "URL Windshield Decal", price: 15, fresh: 1,
     note: "white die-cut vinyl · long windshield format · made to order ★",
     img: "img/d2.jpg" },
-  { id: "d3", cat: "decals", name: "Cross Banner Decal — 6in", price: 15, fresh: 1, mto: 1,
+  { id: "d3", cat: "decals", name: "Cross Banner Decal — 6in", price: 15, fresh: 1,
     note: "white die-cut vinyl · gothic cross banner · made to order ★",
     img: "img/d3.jpg" },
-  { id: "d4", cat: "decals", name: "Reaper Peeker Decal — 6in", price: 15, fresh: 1, mto: 1,
+  { id: "d4", cat: "decals", name: "Reaper Peeker Decal — 6in", price: 15, fresh: 1,
     note: "white die-cut vinyl · reaper peeker · made to order ★",
     img: "img/d4.jpg" },
   { id: "t14", cat: "fresh", name: "Leaf Air Fresheners — Multi Pack", price: 22,
@@ -728,7 +720,6 @@ const money = n => "$" + n.toFixed(2);
 function tagHtml(p) {
   let h = "";
   if (p.fresh) h += '<span class="newtag">NEW DROP</span>';
-  if (p.mto) h += '<span class="mtotag' + (p.fresh ? " below" : "") + '">MADE TO ORDER</span>';
   return h;
 }
 
@@ -859,9 +850,6 @@ function openQV(id) {
   document.getElementById("qvPrice").textContent = money(p.price);
   document.getElementById("qvQty").textContent = qvQty;
   document.getElementById("qvNew").style.display = p.fresh ? "" : "none";
-  const mto = document.getElementById("qvMto");
-  mto.style.display = p.mto ? "" : "none";
-  mto.className = "mtotag" + (p.fresh ? " below" : "");
   qv.classList.add("open");
   qvOverlay.classList.add("open");
   document.body.style.overflow = "hidden";
