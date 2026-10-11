@@ -4,307 +4,300 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#000000">
-<title>DYINGTOLIVE.jp // LINKS</title>
-<meta name="description" content="Static builds only. House decals, cheap parts, DM to order.">
-<link rel="icon" href="logo.png">
+<meta name="robots" content="noindex, nofollow">
+<title>DYINGTOLIVE.jp // VAULT</title>
+<link rel="icon" href="../logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; border-radius: 0 !important; }
   :root {
-    --black: #000000;
-    --panel: #0b0b0c;
-    --white: #ffffff;
-    --muted: #8f8f96;
-    --line: #202024;
-    --chrome-hi: #f4f4f7;
-    --chrome: #c9c9d4;
-    --chrome-lo: #63636d;
-    --amber: #f5b942;
-  }
-  html, body { height: 100%; }
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'Roboto', -apple-system, Helvetica, Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    overflow-x: hidden;
+    --black: #000000; --panel: #0b0b0c; --white: #ffffff;
+    --muted: #8f8f96; --line: #202024;
+    --chrome: #c9c9d4; --chrome-lo: #63636d; --red: #e02020;
   }
   .display { font-family: 'Anton', 'Roboto', sans-serif; font-weight: 400; }
   .chrome-text {
     background: linear-gradient(180deg, #ffffff 0%, #d7d7e0 34%, #71717b 49%, #ececf2 60%, #ffffff 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-  /* animated chrome shine sweep */
-  .shine-text {
-    background: linear-gradient(100deg, #fdfdff 0%, #d7d7e0 28%, #6f6f79 44%, #ffffff 52%, #d7d7e0 62%, #71717b 76%, #fdfdff 100%);
-    background-size: 220% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: chromeShine 6.5s linear infinite;
-  }
-  @keyframes chromeShine { to { background-position: 220% center; } }
-  /* film grain */
-  .grain {
-    position: fixed; inset: -50%; z-index: 2000; pointer-events: none; opacity: .055;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
-    animation: grain 7s steps(8) infinite;
-  }
-  @keyframes grain {
-    0%,100% { transform: translate(0,0); } 25% { transform: translate(-4%,3%); }
-    50% { transform: translate(3%,-4%); } 75% { transform: translate(-3%,-2%); }
-  }
-  /* ticker */
-  .ticker {
-    width: 100%; border-bottom: 1px solid var(--line);
-    overflow: hidden; white-space: nowrap; background: #000;
-    padding: 9px 0; position: relative; z-index: 5;
-  }
-  .ticker-inner { display: inline-block; animation: tick 22s linear infinite; }
-  .ticker span {
-    font-weight: 900; font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
-    padding: 0 18px; color: var(--muted);
-  }
-  .ticker span b { color: var(--chrome); font-weight: 900; }
-  @keyframes tick { to { transform: translateX(-50%); } }
-
-  main {
-    width: 100%; max-width: 440px; text-align: center;
-    padding: 44px 20px 30px; flex: 1; position: relative; z-index: 2;
-  }
-  .logo-wrap {
-    width: 138px; height: 138px; margin: 0 auto 26px;
-    border: 1px solid var(--chrome-lo);
-    padding: 5px; background: #000;
-    box-shadow: 0 0 42px rgba(201,201,212,.14), inset 0 0 22px rgba(201,201,212,.06);
-    animation: logoIn .7s cubic-bezier(.2,.9,.25,1) both;
-  }
-  .logo-wrap img { width: 100%; height: 100%; display: block; object-fit: cover; background: #000; }
-  @keyframes logoIn { from { opacity: 0; transform: scale(.86); } to { opacity: 1; transform: scale(1); } }
-
-  h1.brand {
-    font-family: 'Anton', sans-serif; font-weight: 400;
-    font-size: clamp(58px, 15vw, 92px); line-height: .94; letter-spacing: 1px;
-    text-transform: uppercase;
-    animation: flicker 6s infinite;
-  }
-  h1.brand .row2 { display: block; }
-  @keyframes flicker {
-    0%,100% { opacity: 1; } 92% { opacity: 1; } 93% { opacity: .55; }
-    94% { opacity: 1; } 96% { opacity: .75; } 97% { opacity: 1; }
-  }
-  .handle {
-    color: var(--muted); font-size: 12px; margin-top: 14px;
-    letter-spacing: 5px; text-transform: uppercase; font-weight: 700;
-  }
-  .handle b { color: var(--chrome); }
-
-  /* stat chips */
-  .chips {
-    display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
-    margin-top: 20px; position: relative; z-index: 2;
-  }
-  .chip {
-    font-size: 10px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--chrome); border: 1px solid var(--line);
-    background: rgba(255,255,255,.03); padding: 9px 13px;
-    backdrop-filter: blur(4px);
-  }
-  .chip b { color: var(--white); }
-
-  .sec-head {
-    font-family: 'Anton', sans-serif; font-weight: 400;
-    font-size: 30px; letter-spacing: 2px; text-transform: uppercase;
-    text-align: left; margin: 40px 0 14px;
-  }
-  .sec-head .slash { color: var(--chrome-lo); }
-  .links { display: flex; flex-direction: column; gap: 12px; }
-  .btn {
-    display: block; text-decoration: none; color: var(--white);
-    background: linear-gradient(180deg, #101013, #08080a);
-    border: 1px solid var(--line);
-    padding: 22px 20px; text-align: left;
-    position: relative; overflow: hidden;
-    transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
-  }
-  .btn::after {
-    content: ""; position: absolute; top: 0; bottom: 0; width: 60px;
-    background: linear-gradient(100deg, transparent, rgba(255,255,255,.14), transparent);
-    left: -80px; transform: skewX(-18deg); transition: left .5s ease;
-  }
-  .btn:hover { border-color: var(--chrome); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,.6); }
-  .btn:hover::after { left: 120%; }
-  .btn .t {
-    display: block; font-family: 'Anton', sans-serif; font-weight: 400;
-    font-size: 21px; letter-spacing: 3px; text-transform: uppercase;
-  }
-  .btn .t .star { color: var(--chrome); }
-  .btn small {
-    display: block; color: var(--muted); font-size: 11px;
-    letter-spacing: 2px; margin-top: 7px; text-transform: uppercase; font-weight: 500;
-  }
-  .btn.featured {
-    background: linear-gradient(180deg, #f2f2f6 0%, #c9c9d4 45%, #8f8f9a 55%, #d9d9e2 100%);
-    border: 1px solid #e8e8ee;
-  }
-  .btn.featured .t { color: #000; }
-  .btn.featured .t .star { color: #000; }
-  .btn.featured small { color: rgba(0,0,0,.62); font-weight: 700; }
-  .btn.featured:hover { box-shadow: 0 8px 34px rgba(201,201,212,.25); }
-
-  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s cubic-bezier(.2,.9,.25,1); }
-  .reveal.in { opacity: 1; transform: none; }
-
-  /* hero with ambient motion */
-  .hero-block { position: relative; padding: 6px 0 10px; }
-  .hero-block::before {
-    content: ""; position: absolute; inset: -30px -20px;
-    background: url('img/ambient-bg.jpg') center/cover;
-    opacity: .5; pointer-events: none;
-  }
-  .floaties { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
-  .floaties img {
-    position: absolute; width: 104px; opacity: .24;
-    animation: drift 7s ease-in-out infinite alternate;
-  }
-  .floaties .f1 { top: 4%; left: -16px; animation-duration: 7s; }
-  .floaties .f2 { top: 10%; right: -12px; width: 126px; animation-duration: 9s; animation-delay: -3s; }
-  .floaties .f3 { bottom: 6%; left: 4%; width: 88px; animation-duration: 8s; animation-delay: -5s; }
-  .floaties .f4 { bottom: 12%; right: 6%; width: 96px; animation-duration: 10s; animation-delay: -2s; }
-  @keyframes drift {
-    from { transform: translateY(-12px) rotate(-3deg); }
-    to { transform: translateY(12px) rotate(3deg); }
-  }
-  .hero-block .logo-wrap, .hero-block h1.brand, .hero-block .handle, .hero-block .chips { position: relative; z-index: 2; }
-
-  /* house decals */
-  .decal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .decal-card {
-    display: block; text-decoration: none; color: var(--white);
-    background: var(--panel); border: 1px solid var(--line); overflow: hidden;
-    position: relative;
-    transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
-  }
-  .decal-card:hover { transform: translateY(-3px); border-color: var(--chrome); box-shadow: 0 10px 30px rgba(0,0,0,.6); }
-  .decal-card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; transition: transform .3s ease; }
-  .decal-card:hover img { transform: scale(1.05); }
-  .decal-card .dmeta { padding: 10px 10px 12px; }
-  .decal-card .dname { font-size: 10px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
-  .decal-card .dprice { font-family: 'Anton', sans-serif; font-size: 19px; color: var(--chrome); margin-top: 4px; letter-spacing: 1px; }
-  .decal-card .dtag { font-size: 9px; letter-spacing: 2px; color: var(--muted); margin-top: 3px; text-transform: uppercase; font-weight: 700; }
-  .decal-card .newtag {
-    position: absolute; top: 8px; left: 8px; z-index: 2;
-    background: linear-gradient(180deg, #f2f2f6, #c9c9d4);
-    color: #000; font-size: 9px; font-weight: 900; letter-spacing: 2px;
-    padding: 4px 8px; text-transform: uppercase;
-    animation: pulseTag 1.6s ease-in-out infinite;
-  }
-  @keyframes pulseTag { 0%,100% { opacity: 1; } 50% { opacity: .72; } }
-
-  footer {
-    width: 100%; border-top: 1px solid var(--line); text-align: center;
-    padding: 26px 18px 34px; position: relative; z-index: 2; background: #000;
-  }
-  footer .fine {
-    font-family: 'Anton', sans-serif; font-size: 15px;
-    letter-spacing: 6px; color: var(--chrome); text-transform: uppercase;
-  }
-  footer .tag {
-    margin-top: 10px; font-size: 10px; letter-spacing: 4px;
-    color: var(--muted); text-transform: uppercase; font-weight: 700;
-  }
-  footer .vaultlink { margin-top: 16px; }
-  footer .vaultlink a {
-    font-size: 10px; letter-spacing: 5px; color: #33333a;
-    text-decoration: none; text-transform: uppercase; font-weight: 700;
-  }
-  footer .vaultlink a:hover { color: var(--chrome-lo); }
   ::selection { background: var(--chrome); color: #000; }
+  body {
+    background: var(--black); color: var(--white);
+    font-family: 'Roboto', -apple-system, Helvetica, Arial, sans-serif;
+    min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+    padding: 60px 18px 40px; overflow-x: hidden;
+  }
+  .grain {
+    position: fixed; inset: -50%; z-index: 2000; pointer-events: none; opacity: .05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .gate { text-align: center; max-width: 360px; width: 100%; margin-top: 6vh; position: relative; z-index: 2; }
+  .gate img { width: 92px; height: 92px; margin-bottom: 22px; border: 1px solid var(--chrome-lo); padding: 4px; box-shadow: 0 0 34px rgba(201,201,212,.12); }
+  .gate h1 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 40px; letter-spacing: 4px; text-transform: uppercase; }
+  .gate p { color: var(--muted); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin: 12px 0 22px; font-weight: 700; }
+  .dots { display: flex; justify-content: center; gap: 16px; margin: 6px 0 22px; }
+  .dot {
+    width: 18px; height: 18px; border: 2px solid var(--chrome-lo);
+    background: transparent; transition: background .12s ease, box-shadow .12s ease;
+  }
+  .dot.on { background: var(--chrome); border-color: var(--chrome); box-shadow: 0 0 12px rgba(201,201,212,.6); }
+  .pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .key {
+    background: linear-gradient(180deg, #101013, #08080a); border: 1px solid var(--line); color: var(--white);
+    font-family: 'Anton', sans-serif; font-weight: 400; font-size: 22px; letter-spacing: 1px;
+    padding: 16px 0; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent;
+    transition: border-color .12s ease, transform .12s ease;
+  }
+  .key:hover { border-color: var(--chrome-lo); }
+  .key:active { background: var(--chrome); color: #000; border-color: var(--chrome); transform: scale(.97); }
+  .key.fn { font-family: 'Roboto', sans-serif; font-size: 12px; letter-spacing: 2px; color: var(--muted); font-weight: 900; }
+  .err { color: var(--red); font-size: 12px; font-weight: 900; letter-spacing: 3px; margin-top: 14px; min-height: 18px; text-transform: uppercase; }
+  .shake { animation: shake .3s ease; }
+  @keyframes shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+
+  .vault { width: 100%; max-width: 980px; display: none; position: relative; z-index: 2; }
+  .vault.open { display: block; }
+  .vault header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 12px; }
+  .vault h2 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 36px; letter-spacing: 2px; text-transform: uppercase; }
+  .vault h2 .slash { color: var(--chrome-lo); }
+  .lockbtn {
+    background: transparent; border: 1px solid #3a3a40; color: var(--white);
+    font-weight: 700; font-size: 11px; letter-spacing: 2px; padding: 10px 16px;
+    cursor: pointer; text-transform: uppercase; font-family: 'Roboto', sans-serif;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .lockbtn:hover { border-color: var(--red); color: var(--red); }
+  .sub { color: var(--muted); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; font-weight: 700; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    text-align: left; font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: 900;
+  }
+  td { padding: 12px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  tr { transition: background .12s ease; }
+  tbody tr:hover td { background: var(--panel); }
+  .pname { font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 12px; }
+  .cat { color: var(--muted); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+  .thumb {
+    width: 52px; height: 52px; object-fit: cover; float: left;
+    margin-right: 12px; border: 1px solid var(--line); background: var(--panel);
+  }
+  .fulfill { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; font-weight: 900; margin-top: 5px; }
+  .fulfill-stock { color: var(--muted); }
+  .fulfill-custom { color: #e0a030; }
+  .filters { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+  .fbtn {
+    background: transparent; border: 1px solid var(--line); color: var(--muted);
+    font-family: 'Roboto', sans-serif; font-weight: 900; font-size: 10px; letter-spacing: 2px;
+    padding: 9px 14px; cursor: pointer; text-transform: uppercase;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .fbtn:hover { border-color: var(--chrome-lo); color: var(--white); }
+  .fbtn.on { border-color: var(--chrome); color: var(--white); box-shadow: 0 0 14px rgba(201,201,212,.12); }
+  .cost { color: var(--muted); }
+  .shop { color: var(--chrome); font-weight: 900; }
+  .margin { color: #7ee787; font-weight: 700; }
+  .margin.neg { color: var(--red); }
+  .src {
+    display: inline-block; border: 1px solid var(--line); color: var(--white);
+    text-decoration: none; font-size: 11px; font-weight: 900; letter-spacing: 2px;
+    padding: 8px 14px; text-transform: uppercase; white-space: nowrap;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .src:hover { border-color: var(--chrome); color: var(--chrome); }
+  .warn {
+    margin-top: 26px; border: 1px dashed var(--line); padding: 14px;
+    color: var(--muted); font-size: 11px; letter-spacing: 1px; line-height: 1.8;
+    text-transform: uppercase; font-weight: 500;
+  }
+  @media (max-width: 720px) {
+    table, thead, tbody, th, td, tr { display: block; }
+    thead { display: none; }
+    tr { border: 1px solid var(--line); margin-bottom: 12px; padding: 6px 4px; }
+    td { border: none; padding: 6px 12px; }
+  }
 </style>
 </head>
 <body>
 <div class="grain"></div>
-<div class="ticker"><div class="ticker-inner" id="ticker"></div></div>
-<main>
-  <div class="hero-block">
-    <div class="floaties" aria-hidden="true">
-      <img class="f1" src="shop/img/d1.jpg" alt="">
-      <img class="f2" src="shop/img/d4.jpg" alt="">
-      <img class="f3" src="shop/img/d3.jpg" alt="">
-      <img class="f4" src="shop/img/d2.jpg" alt="">
-    </div>
-    <div class="logo-wrap"><img src="logo.gif" alt="DYINGTOLIVE.jp logo"></div>
-    <h1 class="brand shine-text">DYING<span class="row2">TO LIVE</span></h1>
-    <p class="handle"><b>★</b> @dyingtolive.jp <b>★</b></p>
-    <div class="chips">
-      <span class="chip"><b>★</b> 30 products</span>
-      <span class="chip"><b>★</b> DM checkout</span>
-      <span class="chip"><b>★</b> Zelle ok</span>
-    </div>
-  </div>
 
-  <h2 class="sec-head reveal"><span class="slash">//</span> HOUSE DECALS</h2>
-  <div class="decal-grid">
-    <a class="decal-card reveal" href="shop/?cat=decals">
-      <span class="newtag">NEW DROP</span>
-      <img src="shop/img/d1.jpg" alt="White Cross Decal">
-      <div class="dmeta"><div class="dname">White Cross Decal</div><div class="dprice">$15</div><div class="dtag">our mark ★ die-cut</div></div>
-    </a>
-    <a class="decal-card reveal" href="shop/?cat=decals">
-      <span class="newtag">NEW DROP</span>
-      <img src="shop/img/d2.jpg" alt="URL Windshield Decal">
-      <div class="dmeta"><div class="dname">URL Windshield Decal</div><div class="dprice">$15</div><div class="dtag">windshield strip</div></div>
-    </a>
-    <a class="decal-card reveal" href="shop/?cat=decals">
-      <span class="newtag">NEW DROP</span>
-      <img src="shop/img/d3.jpg" alt="Cross Banner Decal">
-      <div class="dmeta"><div class="dname">Cross Banner Decal</div><div class="dprice">$15</div><div class="dtag">gothic banner</div></div>
-    </a>
-    <a class="decal-card reveal" href="shop/?cat=decals">
-      <span class="newtag">NEW DROP</span>
-      <img src="shop/img/d4.jpg" alt="Reaper Peeker Decal">
-      <div class="dmeta"><div class="dname">Reaper Peeker Decal</div><div class="dprice">$15</div><div class="dtag">peeker ★ die-cut</div></div>
-    </a>
+<div class="gate" id="gate">
+  <img src="../logo.gif" alt="DYINGTOLIVE.jp">
+  <h1 class="chrome-text display">THE VAULT</h1>
+  <p>restricted — enter pin</p>
+  <div class="dots" id="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+  <div class="pad" id="pad">
+    <button class="key" data-d="1">1</button>
+    <button class="key" data-d="2">2</button>
+    <button class="key" data-d="3">3</button>
+    <button class="key" data-d="4">4</button>
+    <button class="key" data-d="5">5</button>
+    <button class="key" data-d="6">6</button>
+    <button class="key" data-d="7">7</button>
+    <button class="key" data-d="8">8</button>
+    <button class="key" data-d="9">9</button>
+    <button class="key fn" data-fn="clear">CLR</button>
+    <button class="key" data-d="0">0</button>
+    <button class="key fn" data-fn="back">⌫</button>
   </div>
+  <div class="err" id="err"></div>
+</div>
 
-  <h2 class="sec-head reveal"><span class="slash">//</span> LINKS</h2>
-  <div class="links">
-    <a class="btn featured reveal" href="shop/">
-      <span class="t">SHOP <span class="star">★</span></span>
-      <small>the catalog — DM checkout, Zelle to pay</small>
-    </a>
-    <a class="btn reveal" href="https://instagram.com/dyingtolive.jp" target="_blank" rel="noopener">
-      <span class="t">INSTAGRAM</span>
-      <small>daily steals, builds &amp; behind the scenes</small>
-    </a>
-    <a class="btn reveal" href="https://www.zellepay.com/" target="_blank" rel="noopener">
-      <span class="t">ZELLE</span>
-      <small>(713) 351-9285</small>
-    </a>
+<div class="vault" id="vault">
+  <header>
+    <h2><span class="slash">//</span> SUPPLIER VAULT</h2>
+    <button class="lockbtn" id="lock">LOCK ✕</button>
+  </header>
+  <div class="sub" id="count"></div>
+  <div class="filters" id="filters">
+    <button class="fbtn on" data-f="all">ALL</button>
+    <button class="fbtn" data-f="custom">MADE TO ORDER</button>
+    <button class="fbtn" data-f="stock">STOCK</button>
   </div>
-</main>
-<footer>
-  <div class="fine">★ DYINGTOLIVE.jp ★</div>
-  <div class="tag">static builds only</div>
-  <div class="vaultlink"><a href="vault/">vault</a></div>
-</footer>
+  <table>
+    <thead><tr>
+      <th>PRODUCT</th><th>COST</th><th>SHOP</th><th>MARGIN</th><th>SOURCE</th>
+    </tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+  <div class="warn">This page is not linked anywhere on the site and is blocked from search engines. The supplier links are encrypted — they only decrypt with your passcode, in this browser tab, and are never sent anywhere. Bookmark this page. If you ever forget the passcode, the vault can be rebuilt from the product database — nothing is lost.</div>
+</div>
+
 <script>
-  // ticker content (duplicated for a seamless loop)
-  const items = ['<b>★</b> DYINGTOLIVE.JP', 'STATIC BUILDS ONLY', '<b>★</b> NEW DECAL DROP', 'DM TO ORDER', '<b>★</b> DYING TO LIVE ORIGINALS'];
-  const half = items.map(t => '<span>' + t + '</span>').join('');
-  document.getElementById('ticker').innerHTML = half + half;
-  // reveal on scroll
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-  }), { threshold: .12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+/* Encrypted supplier payload. Regenerate with:
+   VAULT_PASS='...' node hidden_files/build-vault.mjs
+   (passcode is never written to disk) */
+const VAULT_BLOB = "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";
+
+const enc = new TextEncoder();
+function b64ToBytes(b64) {
+  const s = atob(b64);
+  const b = new Uint8Array(s.length);
+  for (let i = 0; i < s.length; i++) b[i] = s.charCodeAt(i);
+  return b;
+}
+
+async function unlock(passcode) {
+  const raw = b64ToBytes(VAULT_BLOB);
+  const salt = raw.slice(0, 16), iv = raw.slice(16, 28), data = raw.slice(28);
+  const baseKey = await crypto.subtle.importKey("raw", enc.encode(passcode), "PBKDF2", false, ["deriveKey"]);
+  const key = await crypto.subtle.deriveKey(
+    { name: "PBKDF2", salt: salt, iterations: 200000, hash: "SHA-256" },
+    baseKey, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+  const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: iv }, key, data);
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+
+function esc(s) {
+  return String(s == null ? "" : s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+let vaultItems = [];
+let fulfillFilter = "all";
+function fulfillTag(p) {
+  if (p.fulfill === "stock") return '<div class="fulfill fulfill-stock">STOCK</div>';
+  return '<div class="fulfill fulfill-custom">MADE TO ORDER · ' + esc(p.fulfill).toUpperCase() + "</div>";
+}
+function render(items) {
+  vaultItems = items;
+  paintRows();
+}
+function paintRows() {
+  const tb = document.getElementById("rows");
+  tb.innerHTML = "";
+  const list = vaultItems.filter(p =>
+    fulfillFilter === "all" ||
+    (fulfillFilter === "custom" && p.fulfill !== "stock") ||
+    (fulfillFilter === "stock" && p.fulfill === "stock"));
+  list.forEach(p => {
+    const tr = document.createElement("tr");
+    const hasCost = typeof p.cost === "number";
+    const mnum = hasCost ? (p.price - p.cost) : null;
+    const margin = mnum === null ? "—" : (mnum < 0 ? "-$" + Math.abs(mnum).toFixed(2) : "+$" + mnum.toFixed(2));
+    const thumb = p.thumb
+      ? '<img class="thumb" src="' + esc(p.thumb) + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">'
+      : "";
+    tr.innerHTML =
+      '<td>' + thumb + '<div class="pname">' + esc(p.name) + '</div><div class="cat">' + esc(p.cat) + " · " + esc(p.id) + "</div>" + fulfillTag(p) + "</td>" +
+      '<td class="cost">' + (hasCost ? "$" + p.cost.toFixed(2) : "—") + "</td>" +
+      '<td class="shop">$' + Number(p.price).toFixed(2) + "</td>" +
+      '<td class="margin' + (mnum !== null && mnum < 0 ? " neg" : "") + '">' + margin + "</td>" +
+      '<td><a class="src" href="' + esc(p.url) + '" target="_blank" rel="noopener">OPEN SOURCE ↗</a></td>';
+    tb.appendChild(tr);
+  });
+  document.getElementById("count").textContent = list.length + " PRODUCTS · COSTS ARE WHAT YOU PAY · SHOP IS WHAT THEY PAY";
+  document.getElementById("gate").style.display = "none";
+  document.getElementById("vault").classList.add("open");
+}
+document.getElementById("filters").addEventListener("click", e => {
+  const b = e.target.closest(".fbtn");
+  if (!b) return;
+  fulfillFilter = b.dataset.f;
+  document.querySelectorAll(".fbtn").forEach(x => x.classList.toggle("on", x === b));
+  paintRows();
+});
+
+function deny() {
+  const e = document.getElementById("err");
+  e.textContent = "ACCESS DENIED";
+  const g = document.getElementById("gate");
+  g.classList.remove("shake"); void g.offsetWidth; g.classList.add("shake");
+  setTimeout(clearPin, 350);
+}
+
+const PIN_LENGTH = 4;
+let pin = "";
+const dots = Array.from(document.querySelectorAll("#dots .dot"));
+function paintDots() { dots.forEach((d, i) => d.classList.toggle("on", i < pin.length)); }
+function clearPin() { pin = ""; paintDots(); document.getElementById("err").textContent = ""; }
+
+async function tryUnlock() {
+  if (pin.length !== PIN_LENGTH) return;
+  const attempt = pin;
+  try {
+    const items = await unlock(attempt);
+    render(items);
+  } catch (err) { deny(); }
+}
+
+document.getElementById("pad").addEventListener("click", e => {
+  const b = e.target.closest(".key");
+  if (!b) return;
+  if (b.dataset.d && pin.length < PIN_LENGTH) {
+    pin += b.dataset.d;
+    paintDots();
+    if (pin.length === PIN_LENGTH) setTimeout(tryUnlock, 150);
+  } else if (b.dataset.fn === "back") {
+    pin = pin.slice(0, -1);
+    paintDots();
+  } else if (b.dataset.fn === "clear") {
+    clearPin();
+  }
+});
+// physical keyboard support (desktop)
+document.addEventListener("keydown", e => {
+  if (!document.getElementById("vault").classList.contains("open")) {
+    if (/^[0-9]$/.test(e.key) && pin.length < PIN_LENGTH) {
+      pin += e.key; paintDots();
+      if (pin.length === PIN_LENGTH) setTimeout(tryUnlock, 150);
+    } else if (e.key === "Backspace") { pin = pin.slice(0, -1); paintDots(); }
+  }
+});
+document.getElementById("lock").onclick = () => location.reload();
+
+// Some in-app browsers (links opened inside other apps) block the
+// unlock step. Detect it upfront and say so plainly.
+if (!(window.crypto && window.crypto.subtle)) {
+  document.getElementById("pad").style.display = "none";
+  document.getElementById("dots").style.display = "none";
+  const e = document.getElementById("err");
+  e.style.color = "var(--chrome)";
+  e.textContent = "THIS BROWSER BLOCKS UNLOCK — OPEN THIS PAGE IN SAFARI";
+}
 </script>
 </body>
 </html>
