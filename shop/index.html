@@ -766,7 +766,8 @@
 
 /* ============ CATALOG — add new products here ============
    { id, cat, name, price, note, img } — fresh:1 shows a NEW DROP tag,
-   mto:1 shows a MADE TO ORDER tag (house decals, Spinnywhoosh)
+   mto:1 shows a MADE TO ORDER tag (ONLY for products requiring custom notes,
+   e.g. b4 custom banner — never on standard made-to-order items)
    cat: "wheels" | "custom" | "tsurikawa" | "banners" | "knobs" |
         "frames" | "led" | "decals" | "apparel" — img is a path in shop/img/
    soon:1 marks a DROPPING SOON teaser (not purchasable, shows NOTIFY ME) */
@@ -814,7 +815,7 @@ const PRODUCTS = [
     note: "quick release adapter kit included · local warehouse",
     img: "img/a13.jpg",
     stripe: "" },
-  { id: "b4", cat: "custom", name: "Custom Japanese Text Banner", price: 18,
+  { id: "b4", cat: "custom", name: "Custom Japanese Text Banner", price: 18, mto: 1,
     note: "your text in japanese · windshield size · put the text in notes below",
     img: "img/b4.jpg",
     stripe: "" },
@@ -874,28 +875,28 @@ const PRODUCTS = [
     note: "peeker eyes · rear window essential · vinyl",
     img: "img/t13.jpg",
     stripe: "" },
-  { id: "d1", cat: "decals", name: "White Cross Decal — 6in", price: 15, fresh: 1, limited: 1, mto: 1,
-    note: "white die-cut vinyl · our cross logo · made to order ★",
+  { id: "d1", cat: "decals", name: "White Cross Decal — 6in", price: 15, fresh: 1, limited: 1,
+    note: "white die-cut vinyl · our cross logo ★",
     img: "img/d1.jpg",
     stripe: "" },
-  { id: "d2", cat: "decals", name: "URL Windshield Decal", price: 15, fresh: 1, limited: 1, mto: 1,
-    note: "white die-cut vinyl · long windshield format · made to order ★",
+  { id: "d2", cat: "decals", name: "URL Windshield Decal", price: 15, fresh: 1, limited: 1,
+    note: "white die-cut vinyl · long windshield format ★",
     img: "img/d2.jpg",
     stripe: "" },
-  { id: "d3", cat: "decals", name: "Cross Banner Decal — 6in", price: 15, fresh: 1, limited: 1, mto: 1,
-    note: "white die-cut vinyl · gothic cross banner · made to order ★",
+  { id: "d3", cat: "decals", name: "Cross Banner Decal — 6in", price: 15, fresh: 1, limited: 1,
+    note: "white die-cut vinyl · gothic cross banner ★",
     img: "img/d3.jpg",
     stripe: "" },
-  { id: "d4", cat: "decals", name: "Reaper Peeker Decal — 6in", price: 15, fresh: 1, limited: 1, mto: 1,
-    note: "white die-cut vinyl · reaper peeker · made to order ★",
+  { id: "d4", cat: "decals", name: "Reaper Peeker Decal — 6in", price: 15, fresh: 1, limited: 1,
+    note: "white die-cut vinyl · reaper peeker ★",
     img: "img/d4.jpg",
     stripe: "" },
   { id: "m1", cat: "apparel", name: "Cross Tee — Black", price: 30, fresh: 1, soon: 1,
-    note: "heavyweight black tee · white cross chest print · dropping soon ★",
+    note: "heavyweight black tee · white cross chest print · $30 shipped · dropping soon ★",
     img: "img/m1.jpg",
     stripe: "" },
   { id: "m2", cat: "apparel", name: "Cross Hoodie — Black", price: 55, fresh: 1, soon: 1,
-    note: "black pullover hoodie · white cross chest print · dropping soon ★",
+    note: "black pullover hoodie · white cross chest print · $55 shipped · dropping soon ★",
     img: "img/m2.jpg",
     stripe: "" },
 ];
