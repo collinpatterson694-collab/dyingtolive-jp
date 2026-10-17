@@ -522,6 +522,18 @@
     background: rgba(0,0,0,.72); border: 1px solid var(--amber); color: var(--amber);
     font-size: 9px; font-weight: 900; letter-spacing: 2px; padding: 4px 8px; text-transform: uppercase;
   }
+  .soontag {
+    background: var(--amber); border: 1px solid var(--amber); color: #000;
+    font-size: 9px; font-weight: 900; letter-spacing: 2px; padding: 4px 8px; text-transform: uppercase;
+    animation: pulseTag 1.6s ease-in-out infinite;
+  }
+  .notify {
+    background: transparent; border: 1px solid var(--amber); color: var(--amber);
+    font-weight: 900; font-size: 11px; letter-spacing: 2px;
+    padding: 10px 14px; cursor: pointer; text-transform: uppercase;
+    transition: background .15s ease, color .15s ease;
+  }
+  .notify:hover { background: var(--amber); color: #000; }
   .lowtag {
     background: var(--amber); color: #000;
     font-size: 9px; font-weight: 900; letter-spacing: 2px; padding: 4px 8px; text-transform: uppercase;
@@ -620,6 +632,7 @@
 <h2 class="sec-head reveal"><span class="slash">//</span> BROWSE</h2>
 <div class="tiles reveal" id="tiles">
   <button class="tile active" data-cat="all"><img src="img/a2.jpg" alt="All"><span>ALL ★</span></button>
+  <button class="tile" data-cat="apparel"><img src="img/m1.jpg" alt="Apparel"><span>APPAREL ★</span></button>
   <button class="tile" data-cat="wheels"><img src="img/a6.jpg" alt="Steering wheels"><span>STEERING WHEELS</span></button>
   <button class="tile" data-cat="custom"><img src="img/b7.jpg" alt="Custom"><span>CUSTOM</span></button>
   <button class="tile" data-cat="tsurikawa"><img src="img/t1.jpg" alt="Tsurikawa"><span>TSURIKAWA</span></button>
@@ -750,10 +763,11 @@
    { id, cat, name, price, note, img } — fresh:1 shows a NEW DROP tag,
    mto:1 shows a MADE TO ORDER tag (house decals, Spinnywhoosh)
    cat: "wheels" | "custom" | "tsurikawa" | "banners" | "knobs" |
-        "frames" | "led" | "decals" — img is a path in shop/img/ */
+        "frames" | "led" | "decals" | "apparel" — img is a path in shop/img/
+   soon:1 marks a DROPPING SOON teaser (not purchasable, shows NOTIFY ME) */
 const CATS = { wheels: "STEERING WHEEL", custom: "CUSTOM",
   tsurikawa: "TSURIKAWA", banners: "BANNERS", knobs: "SHIFT KNOBS", frames: "PLATE FRAMES",
-  led: "LED", decals: "DECALS" };
+  led: "LED", decals: "DECALS", apparel: "APPAREL" };
 /* honest per-category install guidance shown in quick view */
 const CATS_SPECS = {
   wheels: "hub adapter required · ~30 min install",
@@ -763,7 +777,8 @@ const CATS_SPECS = {
   knobs: "thread-on · adapters included · 5 min install",
   frames: "bolt-on · universal fit · 5 min install",
   led: "usb powered · peel & stick · ~15 min install",
-  decals: "vinyl · peel & stick · 5 min install"
+  decals: "vinyl · peel & stick · 5 min install",
+  apparel: "heavyweight · true to size"
 };
 const PRODUCTS = [
   { id: "a2", cat: "wheels", name: "Suede Deep Dish — Blue Stitch", price: 59,
@@ -870,6 +885,14 @@ const PRODUCTS = [
     note: "white die-cut vinyl · reaper peeker · made to order ★",
     img: "img/d4.jpg",
     stripe: "" },
+  { id: "m1", cat: "apparel", name: "Cross Tee — Black", price: 30, fresh: 1, soon: 1,
+    note: "heavyweight black tee · white cross chest print · dropping soon ★",
+    img: "img/m1.jpg",
+    stripe: "" },
+  { id: "m2", cat: "apparel", name: "Cross Hoodie — Black", price: 55, fresh: 1, soon: 1,
+    note: "black pullover hoodie · white cross chest print · dropping soon ★",
+    img: "img/m2.jpg",
+    stripe: "" },
 ];
 
 /* scarcity: set p.stock to a real number to show "ONLY X LEFT" (x<=5) or
@@ -887,7 +910,8 @@ const money = n => "$" + n.toFixed(2);
 
 function tagHtml(p) {
   let h = "";
-  if (p.fresh) h += '<span class="newtag">NEW DROP</span>';
+  if (p.soon) h += '<span class="soontag">DROPPING SOON</span>';
+  else if (p.fresh) h += '<span class="newtag">NEW DROP</span>';
   if (p.limited) h += '<span class="limtag">LIMITED</span>';
   else if (p.mto) h += '<span class="mtotag">MADE TO ORDER</span>';
   if (p.stock === 0) h += '<span class="soldtag">SOLD OUT</span>';
@@ -918,7 +942,9 @@ function renderGrid() {
     el.className = "card" + (p.stock === 0 ? " soldout" : "");
     el.dataset.id = p.id;
     el.style.animationDelay = Math.min(i * 35, 420) + "ms";
-    const addBtn = p.stock === 0
+    const addBtn = p.soon
+      ? '<button class="notify" data-notify>NOTIFY ME ↓</button>'
+      : p.stock === 0
       ? '<button class="add" disabled>SOLD OUT</button>'
       : '<button class="add" data-id="' + p.id + '">ADD +</button>';
     el.innerHTML =
@@ -938,6 +964,8 @@ function flashAdded(btn) {
   setTimeout(() => { btn.textContent = "ADD +"; btn.classList.remove("added"); }, 1200);
 }
 grid.addEventListener("click", e => {
+  const nb = e.target.closest("[data-notify]");
+  if (nb) { notifyMe(); return; }
   const btn = e.target.closest(".add");
   if (btn) { addToCart(btn.dataset.id, 1); flashAdded(btn); return; }
   const card = e.target.closest(".card");
@@ -964,16 +992,21 @@ renderGrid();
   PRODUCTS.filter(p => p.fresh).forEach(p => {
     const el = document.createElement("div");
     el.className = "ocard";
+    const cta = p.soon
+      ? '<button class="notify" data-notify>NOTIFY ME ↓</button>'
+      : '<button class="add" data-id="' + p.id + '">ADD +</button>';
     el.innerHTML =
       '<div class="imgwrap"><img src="' + p.img + '" alt="' + p.name + '" loading="lazy">' +
       tagHtml(p) + "</div>" +
       '<div class="obody"><div class="oname">' + p.name + '</div>' +
       '<div class="onote">' + p.note + "</div>" +
       '<div class="orow"><div class="oprice">' + money(p.price) + "</div>" +
-      '<button class="add" data-id="' + p.id + '">ADD +</button></div></div>';
+      cta + "</div></div>";
     rail.appendChild(el);
   });
   rail.addEventListener("click", e => {
+    const nb = e.target.closest("[data-notify]");
+    if (nb) { notifyMe(); return; }
     const btn = e.target.closest(".add");
     if (!btn) return;
     addToCart(btn.dataset.id, 1);
@@ -1036,6 +1069,7 @@ function openQV(id) {
   document.getElementById("qvNote").textContent = p.note;
   document.getElementById("qvSpec").textContent = "★ SPECS — " + (CATS_SPECS[p.cat] || "DM us for fitment");
   let tags = "";
+  if (p.soon) tags += '<span class="soontag">DROPPING SOON</span>';
   if (p.limited) tags += '<span class="limtag">LIMITED</span>';
   if (p.mto) tags += '<span class="mtotag">MADE TO ORDER</span>';
   if (p.stock === 0) tags += '<span class="soldtag">SOLD OUT</span>';
@@ -1043,9 +1077,10 @@ function openQV(id) {
   document.getElementById("qvTags").innerHTML = tags;
   document.getElementById("qvPrice").textContent = money(p.price);
   document.getElementById("qvQty").textContent = qvQty;
-  document.getElementById("qvNew").style.display = p.fresh ? "" : "none";
+  document.getElementById("qvNew").style.display = (p.fresh && !p.soon) ? "" : "none";
   const addBtn = document.getElementById("qvAdd");
-  if (p.stock === 0) { addBtn.disabled = true; addBtn.textContent = "SOLD OUT"; }
+  if (p.soon) { addBtn.disabled = false; addBtn.textContent = "NOTIFY ME ↓"; }
+  else if (p.stock === 0) { addBtn.disabled = true; addBtn.textContent = "SOLD OUT"; }
   else { addBtn.disabled = false; addBtn.textContent = "ADD TO CART ★"; }
   renderPairs(id);
   const cardBtn = document.getElementById("qvCard");
@@ -1077,6 +1112,8 @@ document.getElementById("qvPlus").onclick = () => {
 };
 document.getElementById("qvAdd").onclick = () => {
   if (!qvId) return;
+  const p = PRODUCTS.find(x => x.id === qvId);
+  if (p && p.soon) { closeQV(); notifyMe(); return; }
   addToCart(qvId, qvQty);
   closeQV();
 };
@@ -1104,7 +1141,18 @@ let dcRate = 0;
 try { dcRate = parseFloat(localStorage.getItem("dtl_dc") || "0") || 0; } catch (e) { dcRate = 0; }
 const payableTotal = () => cartTotal() * (1 - dcRate);
 
+function notifyMe() {
+  const f = document.getElementById("nlForm");
+  if (f) {
+    f.scrollIntoView({ behavior: "smooth", block: "center" });
+    const em = document.getElementById("nlEmail");
+    if (em) setTimeout(() => em.focus({ preventScroll: true }), 600);
+    toast("DROP YOUR EMAIL — WE'LL PING YOU ★");
+  }
+}
 function addToCart(id, qty) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p || p.soon) return; /* teasers aren't purchasable */
   cart[id] = (cart[id] || 0) + (qty || 1);
   save(); renderCart();
   toast("ADDED TO CART ★");
